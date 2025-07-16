@@ -1,158 +1,354 @@
 <div class="content-section">
   <!-- Borrower Information Section -->
-  <p-card header="Borrower Information" styleClass="mb-4">
-    <div class="form-grid">
-      <div class="field">
-        <label for="borrowerName">Borrower Name</label>
-        <input id="borrowerName" type="text" pInputText [(ngModel)]="borrowerName" readonly />
+  <div class="card floating">
+    <div class="header-section">
+      <h2><i class="pi pi-building mr-3"></i>Borrower Information</h2>
+      <div class="header-actions">
+        <div class="status-indicator">
+          <span class="status-badge active">
+            <i class="pi pi-check-circle mr-2"></i>
+            Active
+          </span>
+        </div>
       </div>
-      
-      <div class="field">
-        <label for="borrowerUen">Borrower UEN</label>
-        <input id="borrowerUen" type="text" pInputText [(ngModel)]="borrowerUen" readonly />
-      </div>
-      
-      <div class="field">
-        <label for="fiscalYearEnd">Borrower Fiscal Year End</label>
-        <p-dropdown 
-          id="fiscalYearEnd"
-          [options]="fiscalYearOptions" 
-          [(ngModel)]="borrowerFiscalYearEnd"
-          optionLabel="label" 
-          optionValue="value"
-          styleClass="w-full">
-        </p-dropdown>
-      </div>
-      
-      <div class="field">
-        <label for="monthlyDueDays">Monthly Due Days</label>
-        <p-inputNumber 
-          id="monthlyDueDays"
-          [(ngModel)]="monthlyDueDays" 
-          mode="decimal" 
-          [useGrouping]="false"
-          styleClass="w-full">
-        </p-inputNumber>
-      </div>
-      
-      <div class="field">
-        <label for="quarterlyDueDays">Quarterly Due Days</label>
-        <div class="flex align-items-center">
-          <p-checkbox 
-            id="quarterlyDueDaysNA"
-            [(ngModel)]="quarterlyDueDaysNA" 
-            [binary]="true">
-          </p-checkbox>
-          <label for="quarterlyDueDaysNA" class="ml-2">N/A</label>
+    </div>
+    <div class="content-section">
+      <div class="form-grid">
+        <div class="field">
+          <label for="borrowerName"><i class="pi pi-user mr-2"></i>Borrower Name</label>
+          <div class="input-wrapper readonly">
+            <input id="borrowerName" type="text" pInputText [(ngModel)]="borrowerName" readonly />
+            <div class="readonly-overlay">
+              <i class="pi pi-lock"></i>
+            </div>
+          </div>
+        </div>
+        
+        <div class="field">
+          <label for="borrowerUen"><i class="pi pi-id-card mr-2"></i>Borrower UEN</label>
+          <div class="input-wrapper readonly">
+            <input id="borrowerUen" type="text" pInputText [(ngModel)]="borrowerUen" readonly />
+            <div class="readonly-overlay">
+              <i class="pi pi-lock"></i>
+            </div>
+          </div>
+        </div>
+        
+        <div class="field">
+          <label for="fiscalYearEnd"><i class="pi pi-calendar mr-2"></i>Borrower Fiscal Year End</label>
+          <div class="input-wrapper">
+            <p-dropdown 
+              id="fiscalYearEnd"
+              [options]="fiscalYearOptions" 
+              [(ngModel)]="borrowerFiscalYearEnd"
+              optionLabel="label" 
+              optionValue="value"
+              styleClass="w-full">
+            </p-dropdown>
+          </div>
+        </div>
+        
+        <div class="field">
+          <label for="monthlyDueDays"><i class="pi pi-clock mr-2"></i>Monthly Due Days</label>
+          <div class="input-wrapper">
+            <p-inputNumber 
+              id="monthlyDueDays"
+              [(ngModel)]="monthlyDueDays" 
+              mode="decimal" 
+              [useGrouping]="false"
+              placeholder="Enter days"
+              styleClass="w-full">
+            </p-inputNumber>
+          </div>
+        </div>
+        
+        <div class="field">
+          <label for="quarterlyDueDays"><i class="pi pi-clock mr-2"></i>Quarterly Due Days</label>
+          <div class="checkbox-wrapper">
+            <p-checkbox 
+              id="quarterlyDueDaysNA"
+              [(ngModel)]="quarterlyDueDaysNA" 
+              [binary]="true">
+            </p-checkbox>
+            <label for="quarterlyDueDaysNA" class="ml-3">
+              <i class="pi pi-ban mr-2"></i>N/A
+            </label>
+          </div>
+        </div>
+        
+        <div class="field">
+          <label for="semiAnnualDueDays"><i class="pi pi-clock mr-2"></i>Semi-Annual Due Days</label>
+          <div class="checkbox-wrapper">
+            <p-checkbox 
+              id="semiAnnualDueDaysNA"
+              [(ngModel)]="semiAnnualDueDaysNA" 
+              [binary]="true">
+            </p-checkbox>
+            <label for="semiAnnualDueDaysNA" class="ml-3">
+              <i class="pi pi-ban mr-2"></i>N/A
+            </label>
+          </div>
+        </div>
+        
+        <div class="field">
+          <label for="annualDueDays"><i class="pi pi-clock mr-2"></i>Annual Due Days</label>
+          <div class="input-wrapper">
+            <p-inputNumber 
+              id="annualDueDays"
+              [(ngModel)]="annualDueDays" 
+              mode="decimal" 
+              [useGrouping]="false"
+              placeholder="Enter days"
+              styleClass="w-full">
+            </p-inputNumber>
+          </div>
         </div>
       </div>
       
-      <div class="field">
-        <label for="semiAnnualDueDays">Semi-Annual Due Days</label>
-        <div class="flex align-items-center">
-          <p-checkbox 
-            id="semiAnnualDueDaysNA"
-            [(ngModel)]="semiAnnualDueDaysNA" 
-            [binary]="true">
-          </p-checkbox>
-          <label for="semiAnnualDueDaysNA" class="ml-2">N/A</label>
-        </div>
-      </div>
-      
-      <div class="field">
-        <label for="annualDueDays">Annual Due Days</label>
-        <p-inputNumber 
-          id="annualDueDays"
-          [(ngModel)]="annualDueDays" 
-          mode="decimal" 
-          [useGrouping]="false"
-          styleClass="w-full">
-        </p-inputNumber>
+      <div class="action-buttons">
+        <p-button 
+          label="Add to Favorites" 
+          icon="pi pi-star"
+          severity="info" 
+          [raised]="true"
+          (onClick)="onAddToFavorites()">
+        </p-button>
+        <p-button 
+          label="Save Borrower" 
+          icon="pi pi-save"
+          severity="success" 
+          [raised]="true"
+          (onClick)="onSaveBorrower()">
+        </p-button>
+        <p-button 
+          label="New Search" 
+          icon="pi pi-search"
+          severity="danger" 
+          [raised]="true"
+          (onClick)="onNewSearch()">
+        </p-button>
+        <p-button 
+          label="Workflow Favorites" 
+          icon="pi pi-heart"
+          severity="info" 
+          [raised]="true"
+          (onClick)="onWorkflowFavorites()">
+        </p-button>
+        <p-button 
+          label="Audit" 
+          icon="pi pi-search"
+          severity="warn" 
+          [raised]="true"
+          (onClick)="onAudit()">
+        </p-button>
       </div>
     </div>
-    
-    <div class="action-buttons">
-      <p-button 
-        label="Add to My Favourite Borrowers" 
-        severity="info" 
-        (onClick)="onAddToFavorites()">
-      </p-button>
-      <p-button 
-        label="Save Borrower" 
-        severity="info" 
-        (onClick)="onSaveBorrower()">
-      </p-button>
-      <p-button 
-        label="New Search" 
-        severity="danger" 
-        (onClick)="onNewSearch()">
-      </p-button>
-      <p-button 
-        label="Workflow Favourites" 
-        severity="info" 
-        (onClick)="onWorkflowFavorites()">
-      </p-button>
-      <p-button 
-        label="Audit" 
-        severity="info" 
-        (onClick)="onAudit()">
-      </p-button>
-    </div>
-  </p-card>
+  </div>
 
   <!-- Document Management Section -->
-  <p-card header="Document Management" styleClass="mb-4">
-    <div class="mb-3">
-      <p-button 
-        label="Entity Folder" 
-        icon="pi pi-folder" 
-        severity="info" 
-        (onClick)="onEntityFolder()">
-      </p-button>
+  <div class="card">
+    <div class="header-section">
+      <h2><i class="pi pi-folder mr-3"></i>Document Management</h2>
+      <div class="header-actions">
+        <p-button 
+          icon="pi pi-refresh" 
+          severity="secondary" 
+          [text]="true" 
+          [rounded]="true" 
+          size="small"
+          pTooltip="Refresh">
+        </p-button>
+        <p-button 
+          icon="pi pi-cog" 
+          severity="secondary" 
+          [text]="true" 
+          [rounded]="true" 
+          size="small"
+          pTooltip="Settings">
+        </p-button>
+      </div>
     </div>
-    
-    <div class="alert-message mb-3 p-3 border-round surface-100">
-      <i class="pi pi-info-circle text-blue-500 mr-2"></i>
-      <span class="text-600">Historical year folders are not viewable here. Please click the 'Entity Folder' link at the top to view these documents.</span>
-    </div>
+    <div class="content-section">
+      <!-- Quick Actions -->
+      <div class="quick-actions mb-4">
+        <p-button 
+          label="Entity Folder" 
+          icon="pi pi-folder-open" 
+          severity="info" 
+          [raised]="true"
+          styleClass="entity-folder-btn"
+          (onClick)="onEntityFolder()">
+        </p-button>
+        <p-button 
+          label="View All Documents" 
+          icon="pi pi-list" 
+          severity="secondary" 
+          [outlined]="true"
+          (onClick)="onViewAllDocuments()">
+        </p-button>
+      </div>
+      
+      <!-- Information Alert -->
+      <div class="info-alert mb-4">
+        <div class="alert-icon">
+          <i class="pi pi-info-circle"></i>
+        </div>
+        <div class="alert-content">
+          <h4>Historical Documents</h4>
+          <p>Historical year folders are not viewable here. Please click the 'Entity Folder' button above to access historical documents and archives.</p>
+        </div>
+      </div>
 
-    <!-- File Upload Section -->
-    <div class="mb-4">
-      <h5>Upload New Documents</h5>
-      <p-fileUpload 
-        mode="advanced" 
-        [multiple]="true" 
-        accept=".pdf,.doc,.docx,.xls,.xlsx" 
-        maxFileSize="10000000"
-        (onUpload)="onUpload($event)"
-        chooseLabel="Choose Files"
-        uploadLabel="Upload"
-        cancelLabel="Cancel">
-        <ng-template pTemplate="content">
-          <div class="text-center p-4">
-            <i class="pi pi-cloud-upload text-4xl text-400"></i>
-            <p class="mt-2 mb-0">Drag and drop files here or click to browse</p>
-            <p class="text-sm text-500">Supported formats: PDF, DOC, DOCX, XLS, XLSX (Max 10MB)</p>
-          </div>
-        </ng-template>
-      </p-fileUpload>
-    </div>
+      <!-- File Upload Section -->
+      <div class="upload-section mb-4">
+        <div class="section-header">
+          <h3><i class="pi pi-cloud-upload mr-2"></i>Upload New Documents</h3>
+          <p class="section-subtitle">Drag and drop files or click to browse</p>
+        </div>
+        
+        <div class="enhanced-file-upload">
+          <p-fileUpload 
+            mode="advanced" 
+            [multiple]="true" 
+            accept=".pdf,.doc,.docx,.xls,.xlsx" 
+            maxFileSize="10000000"
+            (onUpload)="onUpload($event)"
+            (onSelect)="onFileSelect($event)"
+            chooseLabel="Choose Files"
+            uploadLabel="Upload All"
+            cancelLabel="Clear All"
+            styleClass="custom-file-upload">
+            
+            <ng-template pTemplate="header" let-files let-chooseCallback let-clearCallback let-uploadCallback>
+              <div class="upload-header">
+                <div class="upload-actions">
+                  <p-button 
+                    (onClick)="chooseCallback()" 
+                    icon="pi pi-plus" 
+                    label="Add Files"
+                    severity="info"
+                    [outlined]="true">
+                  </p-button>
+                  <p-button 
+                    (onClick)="uploadCallback()" 
+                    icon="pi pi-upload" 
+                    label="Upload All"
+                    severity="success"
+                    [disabled]="!files || files.length === 0">
+                  </p-button>
+                  <p-button 
+                    (onClick)="clearCallback()" 
+                    icon="pi pi-times" 
+                    label="Clear"
+                    severity="danger"
+                    [text]="true"
+                    [disabled]="!files || files.length === 0">
+                  </p-button>
+                </div>
+                <div class="upload-stats" *ngIf="files && files.length > 0">
+                  <span class="file-count">{{ files.length }} file(s) selected</span>
+                  <span class="total-size">{{ getTotalFileSize(files) }}</span>
+                </div>
+              </div>
+            </ng-template>
+            
+            <ng-template pTemplate="content" let-files let-uploadedFiles>
+              <div class="upload-content">
+                <div *ngIf="!files || files.length === 0" class="upload-placeholder">
+                  <div class="upload-icon">
+                    <i class="pi pi-cloud-upload"></i>
+                  </div>
+                  <h4>Drop files here or click to browse</h4>
+                  <p>Supported formats: PDF, DOC, DOCX, XLS, XLSX</p>
+                  <p class="file-size-limit">Maximum file size: 10MB per file</p>
+                </div>
+                
+                <div *ngIf="files && files.length > 0" class="file-list">
+                  <div *ngFor="let file of files; let i = index" class="file-item">
+                    <div class="file-info">
+                      <div class="file-icon">
+                        <i [class]="getFileIcon(file.name)"></i>
+                      </div>
+                      <div class="file-details">
+                        <span class="file-name">{{ file.name }}</span>
+                        <span class="file-size">{{ formatFileSize(file.size) }}</span>
+                      </div>
+                    </div>
+                    <div class="file-actions">
+                      <p-button 
+                        icon="pi pi-times" 
+                        severity="danger" 
+                        [text]="true" 
+                        [rounded]="true" 
+                        size="small"
+                        (onClick)="removeFile(i)">
+                      </p-button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </p-fileUpload>
+        </div>
+      </div>
 
-    <!-- Document Tree -->
-    <div class="document-tree">
-      <h5>Document Folders</h5>
-      <p-tree 
-        [value]="documentTree" 
-        selectionMode="single"
-        styleClass="w-full">
-        <ng-template let-node pTemplate="default">
-          <div class="flex align-items-center">
-            <i [class]="node.icon" class="mr-2"></i>
-            <span>{{ node.label }}</span>
-            <span *ngIf="node.children && node.children.length === 0" class="ml-2 text-500 text-sm">(no files)</span>
-          </div>
-        </ng-template>
-      </p-tree>
+      <!-- Document Tree Section -->
+      <div class="document-tree-section">
+        <div class="section-header">
+          <h3><i class="pi pi-sitemap mr-2"></i>Document Folders</h3>
+          <p class="section-subtitle">Browse and manage document folders by year</p>
+        </div>
+        
+        <div class="enhanced-document-tree">
+          <p-tree 
+            [value]="documentTree" 
+            selectionMode="single"
+            [(selection)]="selectedNode"
+            (onNodeSelect)="onNodeSelect($event)"
+            (onNodeExpand)="onNodeExpand($event)"
+            styleClass="custom-tree">
+            
+            <ng-template let-node pTemplate="default">
+              <div class="tree-node" [class.selected]="selectedNode?.key === node.key">
+                <div class="node-content">
+                  <div class="node-icon">
+                    <i [class]="node.icon" [style.color]="getNodeIconColor(node)"></i>
+                  </div>
+                  <div class="node-info">
+                    <span class="node-label">{{ node.label }}</span>
+                    <span class="node-meta" *ngIf="node.data?.fileCount !== undefined">
+                      {{ node.data.fileCount }} {{ node.data.fileCount === 1 ? 'file' : 'files' }}
+                    </span>
+                    <span class="node-meta empty" *ngIf="node.data?.fileCount === 0">
+                      (no files)
+                    </span>
+                  </div>
+                </div>
+                <div class="node-actions" *ngIf="node.data?.type === 'folder'">
+                  <p-button 
+                    icon="pi pi-plus" 
+                    severity="info" 
+                    [text]="true" 
+                    [rounded]="true" 
+                    size="small"
+                    pTooltip="Add files to folder"
+                    (onClick)="addFilesToFolder(node)">
+                  </p-button>
+                  <p-button 
+                    icon="pi pi-eye" 
+                    severity="secondary" 
+                    [text]="true" 
+                    [rounded]="true" 
+                    size="small"
+                    pTooltip="View folder contents"
+                    (onClick)="viewFolderContents(node)">
+                  </p-button>
+                </div>
+              </div>
+            </ng-template>
+          </p-tree>
+        </div>
+      </div>
     </div>
-  </p-card>
+  </div>
 </div>

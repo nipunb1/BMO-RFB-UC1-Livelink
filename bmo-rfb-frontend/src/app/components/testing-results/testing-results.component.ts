@@ -70,8 +70,12 @@ export class TestingResultsComponent implements OnInit {
     { label: 'Pending', value: 'Pending' }
   ];
 
+  loading: boolean = false;
+  filteredTestingResults: TestingResult[] = [];
+
   ngOnInit() {
     this.loadTestingResults();
+    this.filteredTestingResults = [...this.testingResults];
   }
 
   loadTestingResults() {
@@ -125,5 +129,97 @@ export class TestingResultsComponent implements OnInit {
 
   onFilterChange() {
     console.log('Filter changed to:', this.approvalStatus);
+  }
+
+  getPassCount(): number {
+    return this.testingResults.filter(result => result.passFail === 'Pass').length;
+  }
+
+  getFailCount(): number {
+    return this.testingResults.filter(result => result.passFail === 'Fail').length;
+  }
+
+  getPendingCount(): number {
+    return this.testingResults.filter(result => result.passFail === 'Pending').length;
+  }
+
+  getResultClass(result: number, threshold: number): string {
+    if (result >= threshold * 1.1) {
+      return 'pass';
+    } else if (result >= threshold * 0.9) {
+      return 'warning';
+    } else {
+      return 'fail';
+    }
+  }
+
+  getResultIcon(result: number, threshold: number): string {
+    if (result >= threshold * 1.1) {
+      return 'pi pi-check';
+    } else if (result >= threshold * 0.9) {
+      return 'pi pi-exclamation-triangle';
+    } else {
+      return 'pi pi-times';
+    }
+  }
+
+  getStatusClass(status: string): string {
+    switch (status) {
+      case 'Pass':
+        return 'status-pass';
+      case 'Fail':
+        return 'status-fail';
+      case 'Pending':
+        return 'status-pending';
+      default:
+        return '';
+    }
+  }
+
+  getStatusIcon(status: string): string {
+    switch (status) {
+      case 'Pass':
+        return 'pi pi-check-circle';
+      case 'Fail':
+        return 'pi pi-times-circle';
+      case 'Pending':
+        return 'pi pi-clock';
+      case 'Saved':
+        return 'pi pi-save';
+      case 'Approved':
+        return 'pi pi-verified';
+      default:
+        return 'pi pi-question-circle';
+    }
+  }
+
+  onView(result: TestingResult) {
+    console.log('Viewing testing result:', result);
+  }
+
+  onEdit(result: TestingResult) {
+    console.log('Editing testing result:', result);
+  }
+
+  onRefresh() {
+    this.loading = true;
+    setTimeout(() => {
+      this.loadTestingResults();
+      this.filteredTestingResults = [...this.testingResults];
+      this.loading = false;
+    }, 1000);
+  }
+
+  onExport() {
+    console.log('Exporting testing results');
+  }
+
+  onAddNewTest() {
+    console.log('Adding new test');
+  }
+
+  onClearFilters() {
+    this.approvalStatus = '';
+    this.filteredTestingResults = [...this.testingResults];
   }
 }

@@ -128,4 +128,48 @@ export class MyAssignmentsComponent implements OnInit {
   onAudit(assignment: Assignment) {
     console.log('Auditing assignment:', assignment);
   }
+
+  onView(assignment: Assignment) {
+    console.log('Viewing assignment:', assignment);
+  }
+
+  onEdit(assignment: Assignment) {
+    console.log('Editing assignment:', assignment);
+  }
+
+  getResultClass(result: number, threshold: number): string {
+    if (result >= threshold * 1.1) {
+      return 'pass';
+    } else if (result >= threshold * 0.9) {
+      return 'warning';
+    } else {
+      return 'fail';
+    }
+  }
+
+  getStatusClass(status: string): string {
+    switch (status) {
+      case 'Pass':
+        return 'status-pass';
+      case 'Fail':
+        return 'status-fail';
+      case 'Pending':
+        return 'status-pending';
+      default:
+        return '';
+    }
+  }
+
+  getStatusIcon(status: string): string {
+    switch (status) {
+      case 'Pass':
+        return 'pi pi-check-circle';
+      case 'Fail':
+        return 'pi pi-times-circle';
+      case 'Pending':
+        return 'pi pi-clock';
+      default:
+        return 'pi pi-question-circle';
+    }
+  }
 }

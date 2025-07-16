@@ -141,4 +141,46 @@ export class NotificationRecipientsComponent implements OnInit {
   getRecipientDisplay(recipient: Recipient): string {
     return recipient ? `${recipient.name} (${recipient.email})` : '';
   }
+
+  getActiveRecipientsCount(): number {
+    let count = 0;
+    if (this.recipient1) count++;
+    if (this.recipient2) count++;
+    if (this.recipient3) count++;
+    return count;
+  }
+
+  clearRecipient(recipientNumber: number) {
+    switch (recipientNumber) {
+      case 1:
+        this.recipient1 = null;
+        break;
+      case 2:
+        this.recipient2 = null;
+        break;
+      case 3:
+        this.recipient3 = null;
+        break;
+    }
+  }
+
+  onTestNotifications() {
+    console.log('Testing notifications for all recipients');
+  }
+
+  onReset() {
+    this.recipient1 = null;
+    this.recipient2 = null;
+    this.recipient3 = null;
+    this.receivePassNotifications = false;
+    console.log('Reset all notification settings');
+  }
+
+  getNotificationFrequency(): string {
+    return this.receivePassNotifications ? 'All Events' : 'Failures Only';
+  }
+
+  sendTestEmail(recipient: any) {
+    console.log('Sending test email to:', recipient);
+  }
 }

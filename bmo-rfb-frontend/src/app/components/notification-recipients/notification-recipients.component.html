@@ -1,219 +1,443 @@
 <div class="content-section">
   <!-- Borrower Information Section -->
-  <p-card header="Borrower Information" styleClass="mb-4">
-    <div class="form-grid">
-      <div class="field">
-        <label for="borrowerName">Borrower Name</label>
-        <input id="borrowerName" type="text" pInputText [(ngModel)]="borrowerName" readonly />
-      </div>
-      
-      <div class="field">
-        <label for="borrowerUen">Borrower UEN</label>
-        <input id="borrowerUen" type="text" pInputText [(ngModel)]="borrowerUen" readonly />
-      </div>
-      
-      <div class="field">
-        <label for="fiscalYearEnd">Borrower Fiscal Year End</label>
-        <input id="fiscalYearEnd" type="text" pInputText [(ngModel)]="borrowerFiscalYearEnd" readonly />
-      </div>
-      
-      <div class="field">
-        <label for="monthlyDueDays">Monthly Due Days</label>
-        <input id="monthlyDueDays" type="text" pInputText [value]="monthlyDueDays" readonly />
-      </div>
-      
-      <div class="field">
-        <label for="quarterlyDueDays">Quarterly Due Days</label>
-        <div class="flex align-items-center">
-          <p-checkbox 
-            id="quarterlyDueDaysNA"
-            [(ngModel)]="quarterlyDueDaysNA" 
-            [binary]="true"
-            [disabled]="true">
-          </p-checkbox>
-          <label for="quarterlyDueDaysNA" class="ml-2">N/A</label>
+  <div class="card floating">
+    <div class="header-section">
+      <h2><i class="pi pi-bell mr-3"></i>Notification Management Center</h2>
+      <div class="header-actions">
+        <div class="status-indicator">
+          <span class="status-badge notifications">
+            <i class="pi pi-check-circle mr-2"></i>
+            Active Notifications
+          </span>
         </div>
-      </div>
-      
-      <div class="field">
-        <label for="semiAnnualDueDays">Semi-Annual Due Days</label>
-        <div class="flex align-items-center">
-          <p-checkbox 
-            id="semiAnnualDueDaysNA"
-            [(ngModel)]="semiAnnualDueDaysNA" 
-            [binary]="true"
-            [disabled]="true">
-          </p-checkbox>
-          <label for="semiAnnualDueDaysNA" class="ml-2">N/A</label>
-        </div>
-      </div>
-      
-      <div class="field">
-        <label for="annualDueDays">Annual Due Days</label>
-        <input id="annualDueDays" type="text" pInputText [value]="annualDueDays" readonly />
       </div>
     </div>
-  </p-card>
+    <div class="content-section">
+      <div class="borrower-summary">
+        <div class="summary-item">
+          <div class="summary-icon">
+            <i class="pi pi-building"></i>
+          </div>
+          <div class="summary-content">
+            <span class="summary-label">Borrower</span>
+            <span class="summary-value">{{ borrowerName }}</span>
+          </div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-icon">
+            <i class="pi pi-id-card"></i>
+          </div>
+          <div class="summary-content">
+            <span class="summary-label">UEN</span>
+            <span class="summary-value">{{ borrowerUen }}</span>
+          </div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-icon">
+            <i class="pi pi-calendar"></i>
+          </div>
+          <div class="summary-content">
+            <span class="summary-label">Fiscal Year</span>
+            <span class="summary-value">{{ borrowerFiscalYearEnd }}</span>
+          </div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-icon">
+            <i class="pi pi-clock"></i>
+          </div>
+          <div class="summary-content">
+            <span class="summary-label">Due Days</span>
+            <span class="summary-value">{{ monthlyDueDays }} / {{ annualDueDays }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Notification Recipients Section -->
-  <p-card header="Notification Recipients (Auto Testing)" styleClass="mb-4">
-    <div class="recipients-section">
-      <div class="field">
-        <label for="recipient1">Recipient 1</label>
-        <span class="p-input-icon-right">
-          <i class="pi pi-search"></i>
-          <p-autoComplete
-            id="recipient1"
-            [(ngModel)]="recipient1"
-            [suggestions]="filteredRecipients"
-            (completeMethod)="searchRecipients($event)"
-            field="name"
-            [dropdown]="true"
-            placeholder="Search and select recipient..."
-            styleClass="w-full">
-            <ng-template let-recipient pTemplate="item">
-              <div class="recipient-item">
-                <div class="recipient-name">{{ recipient.name }}</div>
-                <div class="recipient-details">{{ recipient.email }} - {{ recipient.department }}</div>
-              </div>
-            </ng-template>
-          </p-autoComplete>
-        </span>
-        <small class="recipient-display" *ngIf="recipient1">
-          Selected: {{ getRecipientDisplay(recipient1) }}
-        </small>
+  <div class="card">
+    <div class="header-section">
+      <h2><i class="pi pi-users mr-3"></i>Notification Recipients Configuration</h2>
+      <div class="header-actions">
+        <div class="recipients-count">
+          <span class="count-badge">
+            <i class="pi pi-user mr-2"></i>
+            {{ getActiveRecipientsCount() }} Active
+          </span>
+        </div>
       </div>
-      
-      <div class="field">
-        <label for="recipient2">Recipient 2</label>
-        <span class="p-input-icon-right">
-          <i class="pi pi-search"></i>
-          <p-autoComplete
-            id="recipient2"
-            [(ngModel)]="recipient2"
-            [suggestions]="filteredRecipients"
-            (completeMethod)="searchRecipients($event)"
-            field="name"
-            [dropdown]="true"
-            placeholder="Search and select recipient..."
-            styleClass="w-full">
-            <ng-template let-recipient pTemplate="item">
-              <div class="recipient-item">
-                <div class="recipient-name">{{ recipient.name }}</div>
-                <div class="recipient-details">{{ recipient.email }} - {{ recipient.department }}</div>
+    </div>
+    <div class="content-section">
+      <div class="recipients-grid">
+        <!-- Primary Recipient -->
+        <div class="recipient-card primary">
+          <div class="recipient-header">
+            <div class="recipient-icon primary">
+              <i class="pi pi-star"></i>
+            </div>
+            <div class="recipient-title">
+              <h3>Primary Recipient</h3>
+              <p>Main notification contact</p>
+            </div>
+          </div>
+          <div class="recipient-search">
+            <label for="recipient1"><i class="pi pi-search mr-2"></i>Search Primary Recipient</label>
+            <div class="enhanced-autocomplete">
+              <p-autoComplete
+                id="recipient1"
+                [(ngModel)]="recipient1"
+                [suggestions]="filteredRecipients"
+                (completeMethod)="searchRecipients($event)"
+                field="name"
+                [dropdown]="true"
+                placeholder="Type to search recipients..."
+                styleClass="recipient-autocomplete">
+                <ng-template let-recipient pTemplate="item">
+                  <div class="recipient-suggestion">
+                    <div class="recipient-avatar">
+                      <i class="pi pi-user"></i>
+                    </div>
+                    <div class="recipient-info">
+                      <div class="recipient-name">{{ recipient.name }}</div>
+                      <div class="recipient-details">{{ recipient.email }}</div>
+                      <div class="recipient-department">{{ recipient.department }}</div>
+                    </div>
+                    <div class="recipient-status">
+                      <i class="pi pi-check-circle" *ngIf="recipient.active"></i>
+                    </div>
+                  </div>
+                </ng-template>
+              </p-autoComplete>
+            </div>
+            <div class="selected-recipient" *ngIf="recipient1">
+              <div class="selected-info">
+                <i class="pi pi-check mr-2"></i>
+                <span>{{ getRecipientDisplay(recipient1) }}</span>
               </div>
-            </ng-template>
-          </p-autoComplete>
-        </span>
-        <small class="recipient-display" *ngIf="recipient2">
-          Selected: {{ getRecipientDisplay(recipient2) }}
-        </small>
-      </div>
-      
-      <div class="field">
-        <label for="recipient3">Recipient 3</label>
-        <span class="p-input-icon-right">
-          <i class="pi pi-search"></i>
-          <p-autoComplete
-            id="recipient3"
-            [(ngModel)]="recipient3"
-            [suggestions]="filteredRecipients"
-            (completeMethod)="searchRecipients($event)"
-            field="name"
-            [dropdown]="true"
-            placeholder="Search and select recipient..."
-            styleClass="w-full">
-            <ng-template let-recipient pTemplate="item">
-              <div class="recipient-item">
-                <div class="recipient-name">{{ recipient.name }}</div>
-                <div class="recipient-details">{{ recipient.email }} - {{ recipient.department }}</div>
+              <p-button 
+                icon="pi pi-times" 
+                severity="danger" 
+                [text]="true" 
+                [rounded]="true" 
+                size="small"
+                (onClick)="clearRecipient(1)">
+              </p-button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Secondary Recipient -->
+        <div class="recipient-card secondary">
+          <div class="recipient-header">
+            <div class="recipient-icon secondary">
+              <i class="pi pi-user-plus"></i>
+            </div>
+            <div class="recipient-title">
+              <h3>Secondary Recipient</h3>
+              <p>Backup notification contact</p>
+            </div>
+          </div>
+          <div class="recipient-search">
+            <label for="recipient2"><i class="pi pi-search mr-2"></i>Search Secondary Recipient</label>
+            <div class="enhanced-autocomplete">
+              <p-autoComplete
+                id="recipient2"
+                [(ngModel)]="recipient2"
+                [suggestions]="filteredRecipients"
+                (completeMethod)="searchRecipients($event)"
+                field="name"
+                [dropdown]="true"
+                placeholder="Type to search recipients..."
+                styleClass="recipient-autocomplete">
+                <ng-template let-recipient pTemplate="item">
+                  <div class="recipient-suggestion">
+                    <div class="recipient-avatar">
+                      <i class="pi pi-user"></i>
+                    </div>
+                    <div class="recipient-info">
+                      <div class="recipient-name">{{ recipient.name }}</div>
+                      <div class="recipient-details">{{ recipient.email }}</div>
+                      <div class="recipient-department">{{ recipient.department }}</div>
+                    </div>
+                    <div class="recipient-status">
+                      <i class="pi pi-check-circle" *ngIf="recipient.active"></i>
+                    </div>
+                  </div>
+                </ng-template>
+              </p-autoComplete>
+            </div>
+            <div class="selected-recipient" *ngIf="recipient2">
+              <div class="selected-info">
+                <i class="pi pi-check mr-2"></i>
+                <span>{{ getRecipientDisplay(recipient2) }}</span>
               </div>
-            </ng-template>
-          </p-autoComplete>
-        </span>
-        <small class="recipient-display" *ngIf="recipient3">
-          Selected: {{ getRecipientDisplay(recipient3) }}
-        </small>
+              <p-button 
+                icon="pi pi-times" 
+                severity="danger" 
+                [text]="true" 
+                [rounded]="true" 
+                size="small"
+                (onClick)="clearRecipient(2)">
+              </p-button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tertiary Recipient -->
+        <div class="recipient-card tertiary">
+          <div class="recipient-header">
+            <div class="recipient-icon tertiary">
+              <i class="pi pi-users"></i>
+            </div>
+            <div class="recipient-title">
+              <h3>Tertiary Recipient</h3>
+              <p>Additional notification contact</p>
+            </div>
+          </div>
+          <div class="recipient-search">
+            <label for="recipient3"><i class="pi pi-search mr-2"></i>Search Tertiary Recipient</label>
+            <div class="enhanced-autocomplete">
+              <p-autoComplete
+                id="recipient3"
+                [(ngModel)]="recipient3"
+                [suggestions]="filteredRecipients"
+                (completeMethod)="searchRecipients($event)"
+                field="name"
+                [dropdown]="true"
+                placeholder="Type to search recipients..."
+                styleClass="recipient-autocomplete">
+                <ng-template let-recipient pTemplate="item">
+                  <div class="recipient-suggestion">
+                    <div class="recipient-avatar">
+                      <i class="pi pi-user"></i>
+                    </div>
+                    <div class="recipient-info">
+                      <div class="recipient-name">{{ recipient.name }}</div>
+                      <div class="recipient-details">{{ recipient.email }}</div>
+                      <div class="recipient-department">{{ recipient.department }}</div>
+                    </div>
+                    <div class="recipient-status">
+                      <i class="pi pi-check-circle" *ngIf="recipient.active"></i>
+                    </div>
+                  </div>
+                </ng-template>
+              </p-autoComplete>
+            </div>
+            <div class="selected-recipient" *ngIf="recipient3">
+              <div class="selected-info">
+                <i class="pi pi-check mr-2"></i>
+                <span>{{ getRecipientDisplay(recipient3) }}</span>
+              </div>
+              <p-button 
+                icon="pi pi-times" 
+                severity="danger" 
+                [text]="true" 
+                [rounded]="true" 
+                size="small"
+                (onClick)="clearRecipient(3)">
+              </p-button>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="field">
-        <div class="flex align-items-center">
-          <p-checkbox 
-            id="receivePassNotifications"
-            [(ngModel)]="receivePassNotifications" 
-            [binary]="true">
-          </p-checkbox>
-          <label for="receivePassNotifications" class="ml-2">Receive Pass Notifications?</label>
+      <!-- Notification Settings -->
+      <div class="notification-settings-card">
+        <div class="settings-header">
+          <div class="settings-icon">
+            <i class="pi pi-cog"></i>
+          </div>
+          <div class="settings-title">
+            <h3>Notification Preferences</h3>
+            <p>Configure when notifications are sent</p>
+          </div>
         </div>
-        <small class="field-help">
-          When enabled, recipients will receive notifications for both pass and fail results. 
-          When disabled, only failure notifications will be sent.
-        </small>
+        <div class="settings-content">
+          <div class="setting-item">
+            <div class="setting-control">
+              <p-checkbox 
+                id="receivePassNotifications"
+                [(ngModel)]="receivePassNotifications" 
+                [binary]="true">
+              </p-checkbox>
+              <label for="receivePassNotifications" class="setting-label">
+                <span class="label-text">Receive Pass Notifications</span>
+                <span class="label-description">Get notified when tests pass successfully</span>
+              </label>
+            </div>
+            <div class="setting-indicator" [class]="receivePassNotifications ? 'enabled' : 'disabled'">
+              <i [class]="receivePassNotifications ? 'pi pi-check-circle' : 'pi pi-times-circle'"></i>
+            </div>
+          </div>
+          <div class="setting-explanation">
+            <div class="explanation-card" [class]="receivePassNotifications ? 'pass-and-fail' : 'fail-only'">
+              <div class="explanation-icon">
+                <i [class]="receivePassNotifications ? 'pi pi-bell' : 'pi pi-exclamation-triangle'"></i>
+              </div>
+              <div class="explanation-content">
+                <h4>{{ receivePassNotifications ? 'All Notifications Active' : 'Failure Notifications Only' }}</h4>
+                <p>{{ receivePassNotifications ? 'Recipients will receive notifications for both successful and failed test results.' : 'Recipients will only receive notifications when tests fail or require attention.' }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    
-    <div class="action-buttons">
-      <p-button 
-        label="Save" 
-        severity="info" 
-        (onClick)="onSave()">
-      </p-button>
-      <p-button 
-        label="Audit" 
-        severity="info" 
-        (onClick)="onAudit()">
-      </p-button>
-    </div>
-  </p-card>
 
-  <!-- Recipients Summary -->
-  <p-card header="Current Recipients Summary" styleClass="mb-4" *ngIf="recipient1 || recipient2 || recipient3">
-    <div class="recipients-summary">
-      <div class="summary-item" *ngIf="recipient1">
-        <div class="summary-header">
-          <i class="pi pi-user text-primary mr-2"></i>
-          <span class="font-semibold">Primary Recipient</span>
-        </div>
-        <div class="summary-content">
-          <div>{{ recipient1.name }}</div>
-          <div class="text-sm text-500">{{ recipient1.email }}</div>
-          <div class="text-sm text-500">{{ recipient1.department }}</div>
-        </div>
+      <!-- Action Buttons -->
+      <div class="enhanced-action-buttons">
+        <p-button 
+          label="Save Configuration" 
+          icon="pi pi-save"
+          severity="success" 
+          [raised]="true"
+          (onClick)="onSave()">
+        </p-button>
+        <p-button 
+          label="Test Notifications" 
+          icon="pi pi-send"
+          severity="info" 
+          [outlined]="true"
+          (onClick)="onTestNotifications()">
+        </p-button>
+        <p-button 
+          label="Audit Trail" 
+          icon="pi pi-search"
+          severity="warn" 
+          [outlined]="true"
+          (onClick)="onAudit()">
+        </p-button>
+        <p-button 
+          label="Reset All" 
+          icon="pi pi-refresh"
+          severity="secondary" 
+          [outlined]="true"
+          (onClick)="onReset()">
+        </p-button>
       </div>
-      
-      <div class="summary-item" *ngIf="recipient2">
-        <div class="summary-header">
-          <i class="pi pi-user text-primary mr-2"></i>
-          <span class="font-semibold">Secondary Recipient</span>
-        </div>
-        <div class="summary-content">
-          <div>{{ recipient2.name }}</div>
-          <div class="text-sm text-500">{{ recipient2.email }}</div>
-          <div class="text-sm text-500">{{ recipient2.department }}</div>
-        </div>
-      </div>
-      
-      <div class="summary-item" *ngIf="recipient3">
-        <div class="summary-header">
-          <i class="pi pi-user text-primary mr-2"></i>
-          <span class="font-semibold">Tertiary Recipient</span>
-        </div>
-        <div class="summary-content">
-          <div>{{ recipient3.name }}</div>
-          <div class="text-sm text-500">{{ recipient3.email }}</div>
-          <div class="text-sm text-500">{{ recipient3.department }}</div>
+    </div>
+  </div>
+
+  <!-- Active Recipients Overview -->
+  <div class="card" *ngIf="recipient1 || recipient2 || recipient3">
+    <div class="header-section">
+      <h2><i class="pi pi-eye mr-3"></i>Active Recipients Overview</h2>
+      <div class="header-actions">
+        <div class="overview-stats">
+          <span class="stat-item">
+            <i class="pi pi-envelope mr-2"></i>
+            {{ getNotificationFrequency() }}
+          </span>
         </div>
       </div>
     </div>
-    
-    <div class="notification-settings mt-3 p-3 border-round surface-100">
-      <div class="flex align-items-center">
-        <i class="pi pi-bell text-primary mr-2"></i>
-        <span class="font-semibold">Notification Settings:</span>
-        <span class="ml-2" [ngClass]="receivePassNotifications ? 'text-green-600' : 'text-orange-600'">
-          {{ receivePassNotifications ? 'Pass &amp; Fail Notifications' : 'Fail Notifications Only' }}
-        </span>
+    <div class="content-section">
+      <div class="recipients-overview">
+        <div class="overview-item primary" *ngIf="recipient1">
+          <div class="overview-avatar">
+            <i class="pi pi-star"></i>
+          </div>
+          <div class="overview-content">
+            <div class="overview-header">
+              <span class="overview-role">Primary Recipient</span>
+              <span class="overview-status active">Active</span>
+            </div>
+            <div class="overview-details">
+              <h4>{{ recipient1.name }}</h4>
+              <p class="overview-email">{{ recipient1.email }}</p>
+              <p class="overview-department">{{ recipient1.department }}</p>
+            </div>
+          </div>
+          <div class="overview-actions">
+            <p-button 
+              icon="pi pi-envelope" 
+              severity="info" 
+              [text]="true" 
+              [rounded]="true" 
+              size="small"
+              pTooltip="Send Test Email"
+              (onClick)="sendTestEmail(recipient1)">
+            </p-button>
+          </div>
+        </div>
+        
+        <div class="overview-item secondary" *ngIf="recipient2">
+          <div class="overview-avatar">
+            <i class="pi pi-user-plus"></i>
+          </div>
+          <div class="overview-content">
+            <div class="overview-header">
+              <span class="overview-role">Secondary Recipient</span>
+              <span class="overview-status active">Active</span>
+            </div>
+            <div class="overview-details">
+              <h4>{{ recipient2.name }}</h4>
+              <p class="overview-email">{{ recipient2.email }}</p>
+              <p class="overview-department">{{ recipient2.department }}</p>
+            </div>
+          </div>
+          <div class="overview-actions">
+            <p-button 
+              icon="pi pi-envelope" 
+              severity="info" 
+              [text]="true" 
+              [rounded]="true" 
+              size="small"
+              pTooltip="Send Test Email"
+              (onClick)="sendTestEmail(recipient2)">
+            </p-button>
+          </div>
+        </div>
+        
+        <div class="overview-item tertiary" *ngIf="recipient3">
+          <div class="overview-avatar">
+            <i class="pi pi-users"></i>
+          </div>
+          <div class="overview-content">
+            <div class="overview-header">
+              <span class="overview-role">Tertiary Recipient</span>
+              <span class="overview-status active">Active</span>
+            </div>
+            <div class="overview-details">
+              <h4>{{ recipient3.name }}</h4>
+              <p class="overview-email">{{ recipient3.email }}</p>
+              <p class="overview-department">{{ recipient3.department }}</p>
+            </div>
+          </div>
+          <div class="overview-actions">
+            <p-button 
+              icon="pi pi-envelope" 
+              severity="info" 
+              [text]="true" 
+              [rounded]="true" 
+              size="small"
+              pTooltip="Send Test Email"
+              (onClick)="sendTestEmail(recipient3)">
+            </p-button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="notification-summary">
+        <div class="summary-card" [class]="receivePassNotifications ? 'comprehensive' : 'failures-only'">
+          <div class="summary-icon">
+            <i [class]="receivePassNotifications ? 'pi pi-bell' : 'pi pi-exclamation-triangle'"></i>
+          </div>
+          <div class="summary-content">
+            <h3>{{ receivePassNotifications ? 'Comprehensive Notifications' : 'Failure Notifications Only' }}</h3>
+            <p>{{ receivePassNotifications ? 'All recipients will receive notifications for both successful and failed test results.' : 'Recipients will only be notified when tests fail or require immediate attention.' }}</p>
+            <div class="summary-details">
+              <span class="detail-item">
+                <i class="pi pi-users mr-2"></i>
+                {{ getActiveRecipientsCount() }} Active Recipients
+              </span>
+              <span class="detail-item">
+                <i class="pi pi-clock mr-2"></i>
+                Real-time Delivery
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </p-card>
+  </div>
 </div>

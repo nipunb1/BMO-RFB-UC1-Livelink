@@ -1,190 +1,382 @@
 <div class="content-section">
   <!-- My Favourite Borrowers Section -->
-  <p-card header="My Favourite Borrowers" styleClass="mb-4">
-    <div class="field mb-3">
-      <span class="p-input-icon-left w-full">
-        <i class="pi pi-search"></i>
-        <input type="text" pInputText placeholder="Search borrowers..." class="w-full" />
-      </span>
+  <div class="card floating">
+    <div class="header-section">
+      <h2><i class="pi pi-star mr-3"></i>My Favourite Borrowers</h2>
     </div>
-    
-    <div class="favorite-borrowers">
-      <div *ngFor="let borrower of favoriteBorrowers" class="borrower-item p-3 mb-2 border-round surface-100 hover:surface-200 cursor-pointer">
-        <div class="flex align-items-center">
-          <i class="pi pi-star-fill text-yellow-500 mr-2"></i>
-          <span class="font-medium">{{ borrower.date }} - {{ borrower.name }}</span>
+    <div class="content-section">
+      <div class="field mb-4">
+        <div class="search-container">
+          <span class="p-input-icon-left w-full">
+            <i class="pi pi-search"></i>
+            <input type="text" pInputText placeholder="Search your favorite borrowers..." class="w-full search-input" />
+          </span>
+        </div>
+      </div>
+      
+      <div class="favorite-borrowers-grid">
+        <div *ngFor="let borrower of favoriteBorrowers; let i = index" 
+             class="borrower-card" 
+             [style.animation-delay]="(i * 0.1) + 's'">
+          <div class="borrower-content">
+            <div class="borrower-icon">
+              <i class="pi pi-star-fill"></i>
+            </div>
+            <div class="borrower-info">
+              <div class="borrower-date">{{ borrower.date }}</div>
+              <div class="borrower-name">{{ borrower.name }}</div>
+            </div>
+            <div class="borrower-actions">
+              <p-button icon="pi pi-eye" severity="secondary" size="small" [text]="true" [rounded]="true"></p-button>
+              <p-button icon="pi pi-pencil" severity="info" size="small" [text]="true" [rounded]="true"></p-button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </p-card>
+  </div>
 
   <!-- Borrower Information Section -->
-  <p-card header="Borrower Information" styleClass="mb-4">
-    <div class="form-grid">
-      <div class="field">
-        <label for="borrowerName">Borrower Name</label>
-        <span class="p-input-icon-right">
-          <i class="pi pi-search"></i>
-          <input id="borrowerName" type="text" pInputText [(ngModel)]="borrowerName" />
-        </span>
-      </div>
-      
-      <div class="field">
-        <label for="borrowerUen">Borrower UEN</label>
-        <span class="p-input-icon-right">
-          <i class="pi pi-search"></i>
-          <input id="borrowerUen" type="text" pInputText [(ngModel)]="borrowerUen" />
-        </span>
-      </div>
-      
-      <div class="field">
-        <label for="fiscalYearEnd">Borrower Fiscal Year End</label>
-        <p-dropdown 
-          id="fiscalYearEnd"
-          [options]="fiscalYearOptions" 
-          [(ngModel)]="borrowerFiscalYearEnd"
-          optionLabel="label" 
-          optionValue="value"
-          placeholder="Select Fiscal Year End"
-          styleClass="w-full">
-        </p-dropdown>
-      </div>
-      
-      <div class="field">
-        <label for="monthlyDueDays">Monthly Due Days</label>
-        <p-inputNumber 
-          id="monthlyDueDays"
-          [(ngModel)]="monthlyDueDays" 
-          mode="decimal" 
-          [useGrouping]="false"
-          styleClass="w-full">
-        </p-inputNumber>
-      </div>
-      
-      <div class="field">
-        <label for="quarterlyDueDays">Quarterly Due Days</label>
-        <p-inputNumber 
-          id="quarterlyDueDays"
-          [(ngModel)]="quarterlyDueDays" 
-          mode="decimal" 
-          [useGrouping]="false"
-          styleClass="w-full">
-        </p-inputNumber>
-      </div>
-      
-      <div class="field">
-        <label for="semiAnnualDueDays">Semi-Annual Due Days</label>
-        <p-inputNumber 
-          id="semiAnnualDueDays"
-          [(ngModel)]="semiAnnualDueDays" 
-          mode="decimal" 
-          [useGrouping]="false"
-          styleClass="w-full">
-        </p-inputNumber>
-      </div>
-      
-      <div class="field">
-        <label for="annualDueDays">Annual Due Days</label>
-        <p-inputNumber 
-          id="annualDueDays"
-          [(ngModel)]="annualDueDays" 
-          mode="decimal" 
-          [useGrouping]="false"
-          styleClass="w-full">
-        </p-inputNumber>
-      </div>
-      
-      <div class="field">
-        <div class="flex align-items-center">
-          <p-checkbox 
-            id="annualTargetDefaultLogic"
-            [(ngModel)]="annualTargetDefaultLogic" 
-            [binary]="true">
-          </p-checkbox>
-          <label for="annualTargetDefaultLogic" class="ml-2">Annual Target Default Logic</label>
+  <div class="card">
+    <div class="header-section">
+      <h2><i class="pi pi-building mr-3"></i>Borrower Information</h2>
+    </div>
+    <div class="content-section">
+      <div class="form-grid">
+        <div class="field">
+          <label for="borrowerName"><i class="pi pi-user mr-2"></i>Borrower Name</label>
+          <div class="input-wrapper">
+            <span class="p-input-icon-right">
+              <i class="pi pi-search"></i>
+              <input id="borrowerName" type="text" pInputText [(ngModel)]="borrowerName" placeholder="Enter borrower name..." />
+            </span>
+          </div>
+        </div>
+        
+        <div class="field">
+          <label for="borrowerUen"><i class="pi pi-id-card mr-2"></i>Borrower UEN</label>
+          <div class="input-wrapper">
+            <span class="p-input-icon-right">
+              <i class="pi pi-search"></i>
+              <input id="borrowerUen" type="text" pInputText [(ngModel)]="borrowerUen" placeholder="Enter UEN number..." />
+            </span>
+          </div>
+        </div>
+        
+        <div class="field">
+          <label for="fiscalYearEnd"><i class="pi pi-calendar mr-2"></i>Borrower Fiscal Year End</label>
+          <div class="input-wrapper">
+            <p-dropdown 
+              id="fiscalYearEnd"
+              [options]="fiscalYearOptions" 
+              [(ngModel)]="borrowerFiscalYearEnd"
+              optionLabel="label" 
+              optionValue="value"
+              placeholder="Select Fiscal Year End"
+              styleClass="w-full">
+            </p-dropdown>
+          </div>
+        </div>
+        
+        <div class="field">
+          <label for="monthlyDueDays"><i class="pi pi-clock mr-2"></i>Monthly Due Days</label>
+          <div class="input-wrapper">
+            <p-inputNumber 
+              id="monthlyDueDays"
+              [(ngModel)]="monthlyDueDays" 
+              mode="decimal" 
+              [useGrouping]="false"
+              placeholder="Enter days"
+              styleClass="w-full">
+            </p-inputNumber>
+          </div>
+        </div>
+        
+        <div class="field">
+          <label for="quarterlyDueDays"><i class="pi pi-clock mr-2"></i>Quarterly Due Days</label>
+          <div class="input-wrapper">
+            <p-inputNumber 
+              id="quarterlyDueDays"
+              [(ngModel)]="quarterlyDueDays" 
+              mode="decimal" 
+              [useGrouping]="false"
+              placeholder="Enter days"
+              styleClass="w-full">
+            </p-inputNumber>
+          </div>
+        </div>
+        
+        <div class="field">
+          <label for="semiAnnualDueDays"><i class="pi pi-clock mr-2"></i>Semi-Annual Due Days</label>
+          <div class="input-wrapper">
+            <p-inputNumber 
+              id="semiAnnualDueDays"
+              [(ngModel)]="semiAnnualDueDays" 
+              mode="decimal" 
+              [useGrouping]="false"
+              placeholder="Enter days"
+              styleClass="w-full">
+            </p-inputNumber>
+          </div>
+        </div>
+        
+        <div class="field">
+          <label for="annualDueDays"><i class="pi pi-clock mr-2"></i>Annual Due Days</label>
+          <div class="input-wrapper">
+            <p-inputNumber 
+              id="annualDueDays"
+              [(ngModel)]="annualDueDays" 
+              mode="decimal" 
+              [useGrouping]="false"
+              placeholder="Enter days"
+              styleClass="w-full">
+            </p-inputNumber>
+          </div>
+        </div>
+        
+        <div class="field">
+          <div class="checkbox-wrapper">
+            <p-checkbox 
+              id="annualTargetDefaultLogic"
+              [(ngModel)]="annualTargetDefaultLogic" 
+              [binary]="true">
+            </p-checkbox>
+            <label for="annualTargetDefaultLogic" class="ml-3">
+              <i class="pi pi-cog mr-2"></i>Annual Target Default Logic
+            </label>
+          </div>
+        </div>
+        
+        <div class="field">
+          <label for="restrictedAccess"><i class="pi pi-lock mr-2"></i>Restricted Access</label>
+          <div class="input-wrapper">
+            <input id="restrictedAccess" type="text" pInputText [(ngModel)]="restrictedAccess" readonly placeholder="N/A" />
+          </div>
         </div>
       </div>
       
-      <div class="field">
-        <label for="restrictedAccess">Restricted Access</label>
-        <input id="restrictedAccess" type="text" pInputText [(ngModel)]="restrictedAccess" readonly />
+      <div class="action-buttons">
+        <p-button 
+          label="New Search" 
+          icon="pi pi-search"
+          severity="danger" 
+          [raised]="true"
+          (onClick)="onNewSearch()">
+        </p-button>
+        <p-button 
+          label="Save Borrower" 
+          icon="pi pi-save"
+          severity="success" 
+          [raised]="true">
+        </p-button>
+        <p-button 
+          label="Add to Favorites" 
+          icon="pi pi-star"
+          severity="info" 
+          [raised]="true">
+        </p-button>
       </div>
     </div>
-    
-    <div class="action-buttons">
-      <p-button 
-        label="New Search" 
-        severity="danger" 
-        (onClick)="onNewSearch()">
-      </p-button>
-    </div>
-  </p-card>
+  </div>
 
   <!-- My Assignments Table -->
-  <p-card header="My Assignments" styleClass="mb-4">
-    <div class="table-container">
-      <p-table [value]="assignments" [scrollable]="true" scrollHeight="400px" styleClass="p-datatable-sm">
-        <ng-template pTemplate="header">
-          <tr>
-            <th>UEN</th>
-            <th>Borrower Name</th>
-            <th>Statement Desc</th>
-            <th>Tracking Item</th>
-            <th>Due Days</th>
-            <th>Threshold</th>
-            <th>Result</th>
-            <th>Pass/Fail</th>
-            <th>Comments</th>
-            <th>Submitted By</th>
-            <th>Action</th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-assignment>
-          <tr>
-            <td>{{ assignment.uen }}</td>
-            <td>{{ assignment.borrowerName }}</td>
-            <td>{{ assignment.statementDesc }}</td>
-            <td>{{ assignment.trackingItem }}</td>
-            <td>{{ assignment.dueDays }}</td>
-            <td>{{ assignment.threshold }}</td>
-            <td>{{ assignment.result }}</td>
-            <td>
-              <p-dropdown 
-                [options]="passFailOptions" 
-                [(ngModel)]="assignment.passFail"
-                optionLabel="label" 
-                optionValue="value"
-                styleClass="w-full">
-              </p-dropdown>
-            </td>
-            <td>
-              <textarea 
-                pInputTextarea 
-                [(ngModel)]="assignment.comments" 
-                rows="2" 
-                cols="30"
-                class="w-full">
-              </textarea>
-            </td>
-            <td>{{ assignment.submittedBy }}</td>
-            <td>
-              <p-button 
-                label="Audit" 
-                size="small" 
-                (onClick)="onAudit(assignment)">
-              </p-button>
-            </td>
-          </tr>
-        </ng-template>
-      </p-table>
+  <div class="card">
+    <div class="header-section">
+      <h2><i class="pi pi-list mr-3"></i>My Assignments</h2>
+      <div class="header-actions">
+        <p-button icon="pi pi-refresh" severity="secondary" [text]="true" [rounded]="true" size="small"></p-button>
+        <p-button icon="pi pi-download" severity="secondary" [text]="true" [rounded]="true" size="small"></p-button>
+        <p-button icon="pi pi-filter" severity="secondary" [text]="true" [rounded]="true" size="small"></p-button>
+      </div>
     </div>
-  </p-card>
+    <div class="content-section">
+      <div class="table-controls mb-4">
+        <div class="flex justify-content-between align-items-center">
+          <div class="table-info">
+            <span class="text-600">Showing {{ assignments.length }} assignments</span>
+          </div>
+          <div class="table-actions">
+            <span class="p-input-icon-left">
+              <i class="pi pi-search"></i>
+              <input type="text" pInputText placeholder="Search assignments..." class="search-table" />
+            </span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="enhanced-table-container">
+        <p-table 
+          [value]="assignments" 
+          [scrollable]="true" 
+          scrollHeight="500px" 
+          [paginator]="true"
+          [rows]="10"
+          [rowsPerPageOptions]="[5, 10, 20]"
+          [loading]="false"
+          styleClass="enhanced-datatable">
+          
+          <ng-template pTemplate="header">
+            <tr>
+              <th class="text-center w-1"><i class="pi pi-hashtag"></i></th>
+              <th><i class="pi pi-id-card mr-2"></i>UEN</th>
+              <th><i class="pi pi-building mr-2"></i>Borrower Name</th>
+              <th><i class="pi pi-file-text mr-2"></i>Statement Desc</th>
+              <th><i class="pi pi-tag mr-2"></i>Tracking Item</th>
+              <th class="text-center"><i class="pi pi-clock mr-2"></i>Due Days</th>
+              <th class="text-center"><i class="pi pi-chart-line mr-2"></i>Threshold</th>
+              <th class="text-center"><i class="pi pi-calculator mr-2"></i>Result</th>
+              <th class="text-center"><i class="pi pi-check-circle mr-2"></i>Status</th>
+              <th><i class="pi pi-comment mr-2"></i>Comments</th>
+              <th><i class="pi pi-user mr-2"></i>Submitted By</th>
+              <th class="text-center"><i class="pi pi-cog mr-2"></i>Actions</th>
+            </tr>
+          </ng-template>
+          
+          <ng-template pTemplate="body" let-assignment let-rowIndex="rowIndex">
+            <tr class="assignment-row">
+              <td class="text-center">
+                <span class="row-number">{{ rowIndex + 1 }}</span>
+              </td>
+              <td>
+                <span class="uen-badge">{{ assignment.uen }}</span>
+              </td>
+              <td>
+                <div class="borrower-cell">
+                  <i class="pi pi-building text-primary mr-2"></i>
+                  <span class="font-semibold">{{ assignment.borrowerName }}</span>
+                </div>
+              </td>
+              <td>
+                <div class="statement-cell">
+                  {{ assignment.statementDesc }}
+                </div>
+              </td>
+              <td>
+                <span class="tracking-badge">{{ assignment.trackingItem }}</span>
+              </td>
+              <td class="text-center">
+                <span class="due-days-badge">{{ assignment.dueDays }}</span>
+              </td>
+              <td class="text-center">
+                <span class="threshold-value">{{ assignment.threshold | number:'1.2-2' }}</span>
+              </td>
+              <td class="text-center">
+                <span class="result-value" [class]="getResultClass(assignment.result, assignment.threshold)">
+                  {{ assignment.result | number:'1.2-2' }}
+                </span>
+              </td>
+              <td class="text-center">
+                <p-dropdown 
+                  [options]="passFailOptions" 
+                  [(ngModel)]="assignment.passFail"
+                  optionLabel="label" 
+                  optionValue="value"
+                  styleClass="status-dropdown">
+                  <ng-template pTemplate="selectedItem" let-option>
+                    <span [class]="getStatusClass(option.value)">
+                      <i [class]="getStatusIcon(option.value)" class="mr-2"></i>
+                      {{ option.label }}
+                    </span>
+                  </ng-template>
+                </p-dropdown>
+              </td>
+              <td>
+                <div class="comments-cell">
+                  <textarea 
+                    pInputTextarea 
+                    [(ngModel)]="assignment.comments" 
+                    rows="2" 
+                    placeholder="Add comments..."
+                    class="comments-textarea">
+                  </textarea>
+                </div>
+              </td>
+              <td>
+                <div class="submitted-by-cell">
+                  <i class="pi pi-user text-600 mr-2"></i>
+                  <span>{{ assignment.submittedBy }}</span>
+                </div>
+              </td>
+              <td class="text-center">
+                <div class="action-buttons-cell">
+                  <p-button 
+                    icon="pi pi-eye" 
+                    severity="info"
+                    size="small" 
+                    [text]="true"
+                    [rounded]="true"
+                    pTooltip="View Details"
+                    (onClick)="onView(assignment)">
+                  </p-button>
+                  <p-button 
+                    icon="pi pi-search" 
+                    severity="warn"
+                    size="small" 
+                    [text]="true"
+                    [rounded]="true"
+                    pTooltip="Audit"
+                    (onClick)="onAudit(assignment)">
+                  </p-button>
+                  <p-button 
+                    icon="pi pi-pencil" 
+                    severity="secondary"
+                    size="small" 
+                    [text]="true"
+                    [rounded]="true"
+                    pTooltip="Edit"
+                    (onClick)="onEdit(assignment)">
+                  </p-button>
+                </div>
+              </td>
+            </tr>
+          </ng-template>
+          
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="12" class="text-center p-4">
+                <div class="empty-state">
+                  <i class="pi pi-inbox text-400" style="font-size: 3rem;"></i>
+                  <h4 class="text-400 mt-3">No assignments found</h4>
+                  <p class="text-600">Start by creating a new assignment or adjust your search criteria.</p>
+                </div>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
 
   <!-- My Proxy Assignments Section -->
-  <p-card header="My Proxy Assignments" styleClass="mb-4">
-    <div class="text-center text-500 p-4">
-      <i class="pi pi-info-circle mr-2"></i>
-      <span>No proxy assignments available</span>
+  <div class="card">
+    <div class="header-section">
+      <h2><i class="pi pi-users mr-3"></i>My Proxy Assignments</h2>
+      <div class="header-actions">
+        <p-button icon="pi pi-plus" severity="success" [text]="true" [rounded]="true" size="small" pTooltip="Add Proxy"></p-button>
+      </div>
     </div>
-  </p-card>
+    <div class="content-section">
+      <div class="empty-state-enhanced">
+        <div class="empty-icon">
+          <i class="pi pi-users"></i>
+        </div>
+        <h3>No Proxy Assignments</h3>
+        <p>You don't have any proxy assignments at the moment. Proxy assignments will appear here when colleagues delegate their assignments to you.</p>
+        <div class="empty-actions mt-4">
+          <p-button 
+            label="Request Proxy Access" 
+            icon="pi pi-user-plus"
+            severity="info" 
+            [outlined]="true">
+          </p-button>
+          <p-button 
+            label="Learn More" 
+            icon="pi pi-question-circle"
+            severity="help" 
+            [text]="true">
+          </p-button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
