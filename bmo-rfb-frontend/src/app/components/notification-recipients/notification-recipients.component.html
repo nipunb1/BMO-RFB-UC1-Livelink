@@ -1,0 +1,219 @@
+<div class="content-section">
+  <!-- Borrower Information Section -->
+  <p-card header="Borrower Information" styleClass="mb-4">
+    <div class="form-grid">
+      <div class="field">
+        <label for="borrowerName">Borrower Name</label>
+        <input id="borrowerName" type="text" pInputText [(ngModel)]="borrowerName" readonly />
+      </div>
+      
+      <div class="field">
+        <label for="borrowerUen">Borrower UEN</label>
+        <input id="borrowerUen" type="text" pInputText [(ngModel)]="borrowerUen" readonly />
+      </div>
+      
+      <div class="field">
+        <label for="fiscalYearEnd">Borrower Fiscal Year End</label>
+        <input id="fiscalYearEnd" type="text" pInputText [(ngModel)]="borrowerFiscalYearEnd" readonly />
+      </div>
+      
+      <div class="field">
+        <label for="monthlyDueDays">Monthly Due Days</label>
+        <input id="monthlyDueDays" type="text" pInputText [value]="monthlyDueDays" readonly />
+      </div>
+      
+      <div class="field">
+        <label for="quarterlyDueDays">Quarterly Due Days</label>
+        <div class="flex align-items-center">
+          <p-checkbox 
+            id="quarterlyDueDaysNA"
+            [(ngModel)]="quarterlyDueDaysNA" 
+            [binary]="true"
+            [disabled]="true">
+          </p-checkbox>
+          <label for="quarterlyDueDaysNA" class="ml-2">N/A</label>
+        </div>
+      </div>
+      
+      <div class="field">
+        <label for="semiAnnualDueDays">Semi-Annual Due Days</label>
+        <div class="flex align-items-center">
+          <p-checkbox 
+            id="semiAnnualDueDaysNA"
+            [(ngModel)]="semiAnnualDueDaysNA" 
+            [binary]="true"
+            [disabled]="true">
+          </p-checkbox>
+          <label for="semiAnnualDueDaysNA" class="ml-2">N/A</label>
+        </div>
+      </div>
+      
+      <div class="field">
+        <label for="annualDueDays">Annual Due Days</label>
+        <input id="annualDueDays" type="text" pInputText [value]="annualDueDays" readonly />
+      </div>
+    </div>
+  </p-card>
+
+  <!-- Notification Recipients Section -->
+  <p-card header="Notification Recipients (Auto Testing)" styleClass="mb-4">
+    <div class="recipients-section">
+      <div class="field">
+        <label for="recipient1">Recipient 1</label>
+        <span class="p-input-icon-right">
+          <i class="pi pi-search"></i>
+          <p-autoComplete
+            id="recipient1"
+            [(ngModel)]="recipient1"
+            [suggestions]="filteredRecipients"
+            (completeMethod)="searchRecipients($event)"
+            field="name"
+            [dropdown]="true"
+            placeholder="Search and select recipient..."
+            styleClass="w-full">
+            <ng-template let-recipient pTemplate="item">
+              <div class="recipient-item">
+                <div class="recipient-name">{{ recipient.name }}</div>
+                <div class="recipient-details">{{ recipient.email }} - {{ recipient.department }}</div>
+              </div>
+            </ng-template>
+          </p-autoComplete>
+        </span>
+        <small class="recipient-display" *ngIf="recipient1">
+          Selected: {{ getRecipientDisplay(recipient1) }}
+        </small>
+      </div>
+      
+      <div class="field">
+        <label for="recipient2">Recipient 2</label>
+        <span class="p-input-icon-right">
+          <i class="pi pi-search"></i>
+          <p-autoComplete
+            id="recipient2"
+            [(ngModel)]="recipient2"
+            [suggestions]="filteredRecipients"
+            (completeMethod)="searchRecipients($event)"
+            field="name"
+            [dropdown]="true"
+            placeholder="Search and select recipient..."
+            styleClass="w-full">
+            <ng-template let-recipient pTemplate="item">
+              <div class="recipient-item">
+                <div class="recipient-name">{{ recipient.name }}</div>
+                <div class="recipient-details">{{ recipient.email }} - {{ recipient.department }}</div>
+              </div>
+            </ng-template>
+          </p-autoComplete>
+        </span>
+        <small class="recipient-display" *ngIf="recipient2">
+          Selected: {{ getRecipientDisplay(recipient2) }}
+        </small>
+      </div>
+      
+      <div class="field">
+        <label for="recipient3">Recipient 3</label>
+        <span class="p-input-icon-right">
+          <i class="pi pi-search"></i>
+          <p-autoComplete
+            id="recipient3"
+            [(ngModel)]="recipient3"
+            [suggestions]="filteredRecipients"
+            (completeMethod)="searchRecipients($event)"
+            field="name"
+            [dropdown]="true"
+            placeholder="Search and select recipient..."
+            styleClass="w-full">
+            <ng-template let-recipient pTemplate="item">
+              <div class="recipient-item">
+                <div class="recipient-name">{{ recipient.name }}</div>
+                <div class="recipient-details">{{ recipient.email }} - {{ recipient.department }}</div>
+              </div>
+            </ng-template>
+          </p-autoComplete>
+        </span>
+        <small class="recipient-display" *ngIf="recipient3">
+          Selected: {{ getRecipientDisplay(recipient3) }}
+        </small>
+      </div>
+
+      <div class="field">
+        <div class="flex align-items-center">
+          <p-checkbox 
+            id="receivePassNotifications"
+            [(ngModel)]="receivePassNotifications" 
+            [binary]="true">
+          </p-checkbox>
+          <label for="receivePassNotifications" class="ml-2">Receive Pass Notifications?</label>
+        </div>
+        <small class="field-help">
+          When enabled, recipients will receive notifications for both pass and fail results. 
+          When disabled, only failure notifications will be sent.
+        </small>
+      </div>
+    </div>
+    
+    <div class="action-buttons">
+      <p-button 
+        label="Save" 
+        severity="info" 
+        (onClick)="onSave()">
+      </p-button>
+      <p-button 
+        label="Audit" 
+        severity="info" 
+        (onClick)="onAudit()">
+      </p-button>
+    </div>
+  </p-card>
+
+  <!-- Recipients Summary -->
+  <p-card header="Current Recipients Summary" styleClass="mb-4" *ngIf="recipient1 || recipient2 || recipient3">
+    <div class="recipients-summary">
+      <div class="summary-item" *ngIf="recipient1">
+        <div class="summary-header">
+          <i class="pi pi-user text-primary mr-2"></i>
+          <span class="font-semibold">Primary Recipient</span>
+        </div>
+        <div class="summary-content">
+          <div>{{ recipient1.name }}</div>
+          <div class="text-sm text-500">{{ recipient1.email }}</div>
+          <div class="text-sm text-500">{{ recipient1.department }}</div>
+        </div>
+      </div>
+      
+      <div class="summary-item" *ngIf="recipient2">
+        <div class="summary-header">
+          <i class="pi pi-user text-primary mr-2"></i>
+          <span class="font-semibold">Secondary Recipient</span>
+        </div>
+        <div class="summary-content">
+          <div>{{ recipient2.name }}</div>
+          <div class="text-sm text-500">{{ recipient2.email }}</div>
+          <div class="text-sm text-500">{{ recipient2.department }}</div>
+        </div>
+      </div>
+      
+      <div class="summary-item" *ngIf="recipient3">
+        <div class="summary-header">
+          <i class="pi pi-user text-primary mr-2"></i>
+          <span class="font-semibold">Tertiary Recipient</span>
+        </div>
+        <div class="summary-content">
+          <div>{{ recipient3.name }}</div>
+          <div class="text-sm text-500">{{ recipient3.email }}</div>
+          <div class="text-sm text-500">{{ recipient3.department }}</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="notification-settings mt-3 p-3 border-round surface-100">
+      <div class="flex align-items-center">
+        <i class="pi pi-bell text-primary mr-2"></i>
+        <span class="font-semibold">Notification Settings:</span>
+        <span class="ml-2" [ngClass]="receivePassNotifications ? 'text-green-600' : 'text-orange-600'">
+          {{ receivePassNotifications ? 'Pass &amp; Fail Notifications' : 'Fail Notifications Only' }}
+        </span>
+      </div>
+    </div>
+  </p-card>
+</div>

@@ -1,0 +1,43 @@
+.favorite-borrowers {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.borrower-item {
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  
+  &:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.table-container {
+  .p-datatable {
+    .p-datatable-thead > tr > th {
+      background: var(--primary-color);
+      color: white;
+      font-weight: 600;
+      border: none;
+    }
+    
+    .p-datatable-tbody > tr {
+      &:nth-child(even) {
+        background: var(--surface-50);
+      }
+      
+      &:hover {
+        background: var(--primary-50) !important;
+      }
+    }
+  }
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}

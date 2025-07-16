@@ -1,0 +1,171 @@
+<div class="content-section">
+  <!-- Borrower Information Section -->
+  <p-card header="Borrower Information" styleClass="mb-4">
+    <div class="form-grid">
+      <div class="field">
+        <label for="borrowerName">Borrower Name</label>
+        <input id="borrowerName" type="text" pInputText [(ngModel)]="borrowerName" readonly />
+      </div>
+      
+      <div class="field">
+        <label for="borrowerUen">Borrower UEN</label>
+        <input id="borrowerUen" type="text" pInputText [(ngModel)]="borrowerUen" readonly />
+      </div>
+      
+      <div class="field">
+        <label for="fiscalYearEnd">Borrower Fiscal Year End</label>
+        <input id="fiscalYearEnd" type="text" pInputText [(ngModel)]="borrowerFiscalYearEnd" readonly />
+      </div>
+      
+      <div class="field">
+        <label for="monthlyDueDays">Monthly Due Days</label>
+        <input id="monthlyDueDays" type="text" pInputText [value]="monthlyDueDays" readonly />
+      </div>
+      
+      <div class="field">
+        <label for="quarterlyDueDays">Quarterly Due Days</label>
+        <div class="flex align-items-center">
+          <p-checkbox 
+            id="quarterlyDueDaysNA"
+            [(ngModel)]="quarterlyDueDaysNA" 
+            [binary]="true"
+            [disabled]="true">
+          </p-checkbox>
+          <label for="quarterlyDueDaysNA" class="ml-2">N/A</label>
+        </div>
+      </div>
+      
+      <div class="field">
+        <label for="semiAnnualDueDays">Semi-Annual Due Days</label>
+        <div class="flex align-items-center">
+          <p-checkbox 
+            id="semiAnnualDueDaysNA"
+            [(ngModel)]="semiAnnualDueDaysNA" 
+            [binary]="true"
+            [disabled]="true">
+          </p-checkbox>
+          <label for="semiAnnualDueDaysNA" class="ml-2">N/A</label>
+        </div>
+      </div>
+      
+      <div class="field">
+        <label for="annualDueDays">Annual Due Days</label>
+        <input id="annualDueDays" type="text" pInputText [value]="annualDueDays" readonly />
+      </div>
+    </div>
+  </p-card>
+
+  <!-- Current Testing Results Section -->
+  <p-card header="Current Testing Results" styleClass="mb-4">
+    <!-- Filter Section -->
+    <div class="filter-section mb-4">
+      <div class="field">
+        <label for="approvalStatus">Approval Status</label>
+        <p-dropdown 
+          id="approvalStatus"
+          [options]="approvalStatusOptions" 
+          [(ngModel)]="approvalStatus"
+          optionLabel="label" 
+          optionValue="value"
+          (onChange)="onFilterChange()"
+          styleClass="w-full md:w-20rem">
+        </p-dropdown>
+      </div>
+    </div>
+
+    <!-- Testing Results Table -->
+    <div class="table-container">
+      <p-table [value]="testingResults" [scrollable]="true" scrollHeight="500px" styleClass="p-datatable-sm">
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width: 25%">Statement Desc</th>
+            <th style="width: 20%">Tracking Item</th>
+            <th style="width: 8%">Due Days</th>
+            <th style="width: 8%">Threshold</th>
+            <th style="width: 8%">Result</th>
+            <th style="width: 10%">Pass/Fail</th>
+            <th style="width: 15%">Comments</th>
+            <th style="width: 8%">Status</th>
+            <th style="width: 8%">Action</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-result>
+          <tr>
+            <td>
+              <textarea 
+                pInputTextarea 
+                [(ngModel)]="result.statementDesc" 
+                rows="4" 
+                class="w-full"
+                [autoResize]="true">
+              </textarea>
+            </td>
+            <td>
+              <input 
+                type="text" 
+                pInputText 
+                [(ngModel)]="result.trackingItem" 
+                class="w-full" />
+            </td>
+            <td>
+              <p-inputNumber 
+                [(ngModel)]="result.dueDays" 
+                mode="decimal" 
+                [useGrouping]="false"
+                styleClass="w-full">
+              </p-inputNumber>
+            </td>
+            <td>
+              <p-inputNumber 
+                [(ngModel)]="result.threshold" 
+                mode="decimal" 
+                [minFractionDigits]="2"
+                [maxFractionDigits]="2"
+                styleClass="w-full">
+              </p-inputNumber>
+            </td>
+            <td>
+              <p-inputNumber 
+                [(ngModel)]="result.result" 
+                mode="decimal" 
+                [minFractionDigits]="2"
+                [maxFractionDigits]="2"
+                styleClass="w-full">
+              </p-inputNumber>
+            </td>
+            <td>
+              <p-dropdown 
+                [options]="passFailOptions" 
+                [(ngModel)]="result.passFail"
+                optionLabel="label" 
+                optionValue="value"
+                styleClass="w-full">
+              </p-dropdown>
+            </td>
+            <td>
+              <textarea 
+                pInputTextarea 
+                [(ngModel)]="result.comments" 
+                rows="4" 
+                class="w-full"
+                [autoResize]="true">
+              </textarea>
+            </td>
+            <td>
+              <span class="status-badge" [ngClass]="'status-' + result.status.toLowerCase()">
+                {{ result.status }}
+              </span>
+            </td>
+            <td>
+              <p-button 
+                label="Audit" 
+                size="small" 
+                (onClick)="onAudit(result)">
+              </p-button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </p-card>
+</div>

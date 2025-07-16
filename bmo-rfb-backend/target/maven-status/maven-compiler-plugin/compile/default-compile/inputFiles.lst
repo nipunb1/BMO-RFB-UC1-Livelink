@@ -1,0 +1,16 @@
+/home/ubuntu/bmo-rfb-project/bmo-rfb-backend/src/main/java/com/bmo/rfb/repository/AssignmentRepository.java
+/home/ubuntu/bmo-rfb-project/bmo-rfb-backend/src/main/java/com/bmo/rfb/controller/AssignmentController.java
+/home/ubuntu/bmo-rfb-project/bmo-rfb-backend/src/main/java/com/bmo/rfb/controller/TestingResultController.java
+/home/ubuntu/bmo-rfb-project/bmo-rfb-backend/src/main/java/com/bmo/rfb/repository/DocumentRepository.java
+/home/ubuntu/bmo-rfb-project/bmo-rfb-backend/src/main/java/com/bmo/rfb/model/Document.java
+/home/ubuntu/bmo-rfb-project/bmo-rfb-backend/src/main/java/com/bmo/rfb/model/Assignment.java
+/home/ubuntu/bmo-rfb-project/bmo-rfb-backend/src/main/java/com/bmo/rfb/config/DataInitializer.java
+/home/ubuntu/bmo-rfb-project/bmo-rfb-backend/src/main/java/com/bmo/rfb/service/TestingResultService.java
+/home/ubuntu/bmo-rfb-project/bmo-rfb-backend/src/main/java/com/bmo/rfb/service/AssignmentService.java
+/home/ubuntu/bmo-rfb-project/bmo-rfb-backend/src/main/java/com/bmo/rfb/RfbApplication.java
+/home/ubuntu/bmo-rfb-project/bmo-rfb-backend/src/main/java/com/bmo/rfb/repository/NotificationRecipientRepository.java
+/home/ubuntu/bmo-rfb-project/bmo-rfb-backend/src/main/java/com/bmo/rfb/model/TestingResult.java
+/home/ubuntu/bmo-rfb-project/bmo-rfb-backend/src/main/java/com/bmo/rfb/service/NotificationRecipientService.java
+/home/ubuntu/bmo-rfb-project/bmo-rfb-backend/src/main/java/com/bmo/rfb/controller/NotificationRecipientController.java
+/home/ubuntu/bmo-rfb-project/bmo-rfb-backend/src/main/java/com/bmo/rfb/repository/TestingResultRepository.java
+/home/ubuntu/bmo-rfb-project/bmo-rfb-backend/src/main/java/com/bmo/rfb/model/NotificationRecipient.java

@@ -1,0 +1,35 @@
+<div class="bmo-header">
+  <div class="bmo-logo">
+    <i class="pi pi-building" style="font-size: 1.5rem;"></i>
+    <span>BMO Financial Group</span>
+  </div>
+  <div class="page-title">{{ currentPageTitle }}</div>
+</div>
+
+<div class="card">
+  <p-tabView [(activeIndex)]="activeTabIndex" (onChange)="onTabChange($event)">
+    <p-tabPanel header="My Assignments">
+      <div class="tab-content">
+        <app-my-assignments></app-my-assignments>
+      </div>
+    </p-tabPanel>
+    
+    <p-tabPanel header="Upload Docs">
+      <div class="tab-content">
+        <app-upload-docs></app-upload-docs>
+      </div>
+    </p-tabPanel>
+    
+    <p-tabPanel header="Testing Results">
+      <div class="tab-content">
+        <app-testing-results></app-testing-results>
+      </div>
+    </p-tabPanel>
+    
+    <p-tabPanel header="Notification Recipients">
+      <div class="tab-content">
+        <app-notification-recipients></app-notification-recipients>
+      </div>
+    </p-tabPanel>
+  </p-tabView>
+</div>

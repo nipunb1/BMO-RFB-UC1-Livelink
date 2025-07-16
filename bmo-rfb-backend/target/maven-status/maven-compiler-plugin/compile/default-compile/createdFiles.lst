@@ -1,0 +1,15 @@
+com/bmo/rfb/config/DataInitializer.class
+com/bmo/rfb/repository/DocumentRepository.class
+com/bmo/rfb/repository/NotificationRecipientRepository.class
+com/bmo/rfb/service/TestingResultService.class
+com/bmo/rfb/service/AssignmentService.class
+com/bmo/rfb/model/Assignment.class
+com/bmo/rfb/model/TestingResult.class
+com/bmo/rfb/model/NotificationRecipient.class
+com/bmo/rfb/repository/AssignmentRepository.class
+com/bmo/rfb/model/Document.class
+com/bmo/rfb/service/NotificationRecipientService.class
+com/bmo/rfb/controller/NotificationRecipientController.class
+com/bmo/rfb/controller/TestingResultController.class
+com/bmo/rfb/controller/AssignmentController.class
+com/bmo/rfb/repository/TestingResultRepository.class

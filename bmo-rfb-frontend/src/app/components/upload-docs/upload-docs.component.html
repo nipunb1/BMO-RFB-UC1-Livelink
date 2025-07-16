@@ -1,0 +1,158 @@
+<div class="content-section">
+  <!-- Borrower Information Section -->
+  <p-card header="Borrower Information" styleClass="mb-4">
+    <div class="form-grid">
+      <div class="field">
+        <label for="borrowerName">Borrower Name</label>
+        <input id="borrowerName" type="text" pInputText [(ngModel)]="borrowerName" readonly />
+      </div>
+      
+      <div class="field">
+        <label for="borrowerUen">Borrower UEN</label>
+        <input id="borrowerUen" type="text" pInputText [(ngModel)]="borrowerUen" readonly />
+      </div>
+      
+      <div class="field">
+        <label for="fiscalYearEnd">Borrower Fiscal Year End</label>
+        <p-dropdown 
+          id="fiscalYearEnd"
+          [options]="fiscalYearOptions" 
+          [(ngModel)]="borrowerFiscalYearEnd"
+          optionLabel="label" 
+          optionValue="value"
+          styleClass="w-full">
+        </p-dropdown>
+      </div>
+      
+      <div class="field">
+        <label for="monthlyDueDays">Monthly Due Days</label>
+        <p-inputNumber 
+          id="monthlyDueDays"
+          [(ngModel)]="monthlyDueDays" 
+          mode="decimal" 
+          [useGrouping]="false"
+          styleClass="w-full">
+        </p-inputNumber>
+      </div>
+      
+      <div class="field">
+        <label for="quarterlyDueDays">Quarterly Due Days</label>
+        <div class="flex align-items-center">
+          <p-checkbox 
+            id="quarterlyDueDaysNA"
+            [(ngModel)]="quarterlyDueDaysNA" 
+            [binary]="true">
+          </p-checkbox>
+          <label for="quarterlyDueDaysNA" class="ml-2">N/A</label>
+        </div>
+      </div>
+      
+      <div class="field">
+        <label for="semiAnnualDueDays">Semi-Annual Due Days</label>
+        <div class="flex align-items-center">
+          <p-checkbox 
+            id="semiAnnualDueDaysNA"
+            [(ngModel)]="semiAnnualDueDaysNA" 
+            [binary]="true">
+          </p-checkbox>
+          <label for="semiAnnualDueDaysNA" class="ml-2">N/A</label>
+        </div>
+      </div>
+      
+      <div class="field">
+        <label for="annualDueDays">Annual Due Days</label>
+        <p-inputNumber 
+          id="annualDueDays"
+          [(ngModel)]="annualDueDays" 
+          mode="decimal" 
+          [useGrouping]="false"
+          styleClass="w-full">
+        </p-inputNumber>
+      </div>
+    </div>
+    
+    <div class="action-buttons">
+      <p-button 
+        label="Add to My Favourite Borrowers" 
+        severity="info" 
+        (onClick)="onAddToFavorites()">
+      </p-button>
+      <p-button 
+        label="Save Borrower" 
+        severity="info" 
+        (onClick)="onSaveBorrower()">
+      </p-button>
+      <p-button 
+        label="New Search" 
+        severity="danger" 
+        (onClick)="onNewSearch()">
+      </p-button>
+      <p-button 
+        label="Workflow Favourites" 
+        severity="info" 
+        (onClick)="onWorkflowFavorites()">
+      </p-button>
+      <p-button 
+        label="Audit" 
+        severity="info" 
+        (onClick)="onAudit()">
+      </p-button>
+    </div>
+  </p-card>
+
+  <!-- Document Management Section -->
+  <p-card header="Document Management" styleClass="mb-4">
+    <div class="mb-3">
+      <p-button 
+        label="Entity Folder" 
+        icon="pi pi-folder" 
+        severity="info" 
+        (onClick)="onEntityFolder()">
+      </p-button>
+    </div>
+    
+    <div class="alert-message mb-3 p-3 border-round surface-100">
+      <i class="pi pi-info-circle text-blue-500 mr-2"></i>
+      <span class="text-600">Historical year folders are not viewable here. Please click the 'Entity Folder' link at the top to view these documents.</span>
+    </div>
+
+    <!-- File Upload Section -->
+    <div class="mb-4">
+      <h5>Upload New Documents</h5>
+      <p-fileUpload 
+        mode="advanced" 
+        [multiple]="true" 
+        accept=".pdf,.doc,.docx,.xls,.xlsx" 
+        maxFileSize="10000000"
+        (onUpload)="onUpload($event)"
+        chooseLabel="Choose Files"
+        uploadLabel="Upload"
+        cancelLabel="Cancel">
+        <ng-template pTemplate="content">
+          <div class="text-center p-4">
+            <i class="pi pi-cloud-upload text-4xl text-400"></i>
+            <p class="mt-2 mb-0">Drag and drop files here or click to browse</p>
+            <p class="text-sm text-500">Supported formats: PDF, DOC, DOCX, XLS, XLSX (Max 10MB)</p>
+          </div>
+        </ng-template>
+      </p-fileUpload>
+    </div>
+
+    <!-- Document Tree -->
+    <div class="document-tree">
+      <h5>Document Folders</h5>
+      <p-tree 
+        [value]="documentTree" 
+        selectionMode="single"
+        styleClass="w-full">
+        <ng-template let-node pTemplate="default">
+          <div class="flex align-items-center">
+            <i [class]="node.icon" class="mr-2"></i>
+            <span>{{ node.label }}</span>
+            <span *ngIf="node.children && node.children.length === 0" class="ml-2 text-500 text-sm">(no files)</span>
+          </div>
+        </ng-template>
+      </p-tree>
+    </div>
+  </p-card>
+</div>

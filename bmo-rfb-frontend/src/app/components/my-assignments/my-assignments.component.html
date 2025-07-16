@@ -1,0 +1,190 @@
+<div class="content-section">
+  <!-- My Favourite Borrowers Section -->
+  <p-card header="My Favourite Borrowers" styleClass="mb-4">
+    <div class="field mb-3">
+      <span class="p-input-icon-left w-full">
+        <i class="pi pi-search"></i>
+        <input type="text" pInputText placeholder="Search borrowers..." class="w-full" />
+      </span>
+    </div>
+    
+    <div class="favorite-borrowers">
+      <div *ngFor="let borrower of favoriteBorrowers" class="borrower-item p-3 mb-2 border-round surface-100 hover:surface-200 cursor-pointer">
+        <div class="flex align-items-center">
+          <i class="pi pi-star-fill text-yellow-500 mr-2"></i>
+          <span class="font-medium">{{ borrower.date }} - {{ borrower.name }}</span>
+        </div>
+      </div>
+    </div>
+  </p-card>
+
+  <!-- Borrower Information Section -->
+  <p-card header="Borrower Information" styleClass="mb-4">
+    <div class="form-grid">
+      <div class="field">
+        <label for="borrowerName">Borrower Name</label>
+        <span class="p-input-icon-right">
+          <i class="pi pi-search"></i>
+          <input id="borrowerName" type="text" pInputText [(ngModel)]="borrowerName" />
+        </span>
+      </div>
+      
+      <div class="field">
+        <label for="borrowerUen">Borrower UEN</label>
+        <span class="p-input-icon-right">
+          <i class="pi pi-search"></i>
+          <input id="borrowerUen" type="text" pInputText [(ngModel)]="borrowerUen" />
+        </span>
+      </div>
+      
+      <div class="field">
+        <label for="fiscalYearEnd">Borrower Fiscal Year End</label>
+        <p-dropdown 
+          id="fiscalYearEnd"
+          [options]="fiscalYearOptions" 
+          [(ngModel)]="borrowerFiscalYearEnd"
+          optionLabel="label" 
+          optionValue="value"
+          placeholder="Select Fiscal Year End"
+          styleClass="w-full">
+        </p-dropdown>
+      </div>
+      
+      <div class="field">
+        <label for="monthlyDueDays">Monthly Due Days</label>
+        <p-inputNumber 
+          id="monthlyDueDays"
+          [(ngModel)]="monthlyDueDays" 
+          mode="decimal" 
+          [useGrouping]="false"
+          styleClass="w-full">
+        </p-inputNumber>
+      </div>
+      
+      <div class="field">
+        <label for="quarterlyDueDays">Quarterly Due Days</label>
+        <p-inputNumber 
+          id="quarterlyDueDays"
+          [(ngModel)]="quarterlyDueDays" 
+          mode="decimal" 
+          [useGrouping]="false"
+          styleClass="w-full">
+        </p-inputNumber>
+      </div>
+      
+      <div class="field">
+        <label for="semiAnnualDueDays">Semi-Annual Due Days</label>
+        <p-inputNumber 
+          id="semiAnnualDueDays"
+          [(ngModel)]="semiAnnualDueDays" 
+          mode="decimal" 
+          [useGrouping]="false"
+          styleClass="w-full">
+        </p-inputNumber>
+      </div>
+      
+      <div class="field">
+        <label for="annualDueDays">Annual Due Days</label>
+        <p-inputNumber 
+          id="annualDueDays"
+          [(ngModel)]="annualDueDays" 
+          mode="decimal" 
+          [useGrouping]="false"
+          styleClass="w-full">
+        </p-inputNumber>
+      </div>
+      
+      <div class="field">
+        <div class="flex align-items-center">
+          <p-checkbox 
+            id="annualTargetDefaultLogic"
+            [(ngModel)]="annualTargetDefaultLogic" 
+            [binary]="true">
+          </p-checkbox>
+          <label for="annualTargetDefaultLogic" class="ml-2">Annual Target Default Logic</label>
+        </div>
+      </div>
+      
+      <div class="field">
+        <label for="restrictedAccess">Restricted Access</label>
+        <input id="restrictedAccess" type="text" pInputText [(ngModel)]="restrictedAccess" readonly />
+      </div>
+    </div>
+    
+    <div class="action-buttons">
+      <p-button 
+        label="New Search" 
+        severity="danger" 
+        (onClick)="onNewSearch()">
+      </p-button>
+    </div>
+  </p-card>
+
+  <!-- My Assignments Table -->
+  <p-card header="My Assignments" styleClass="mb-4">
+    <div class="table-container">
+      <p-table [value]="assignments" [scrollable]="true" scrollHeight="400px" styleClass="p-datatable-sm">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>UEN</th>
+            <th>Borrower Name</th>
+            <th>Statement Desc</th>
+            <th>Tracking Item</th>
+            <th>Due Days</th>
+            <th>Threshold</th>
+            <th>Result</th>
+            <th>Pass/Fail</th>
+            <th>Comments</th>
+            <th>Submitted By</th>
+            <th>Action</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-assignment>
+          <tr>
+            <td>{{ assignment.uen }}</td>
+            <td>{{ assignment.borrowerName }}</td>
+            <td>{{ assignment.statementDesc }}</td>
+            <td>{{ assignment.trackingItem }}</td>
+            <td>{{ assignment.dueDays }}</td>
+            <td>{{ assignment.threshold }}</td>
+            <td>{{ assignment.result }}</td>
+            <td>
+              <p-dropdown 
+                [options]="passFailOptions" 
+                [(ngModel)]="assignment.passFail"
+                optionLabel="label" 
+                optionValue="value"
+                styleClass="w-full">
+              </p-dropdown>
+            </td>
+            <td>
+              <textarea 
+                pInputTextarea 
+                [(ngModel)]="assignment.comments" 
+                rows="2" 
+                cols="30"
+                class="w-full">
+              </textarea>
+            </td>
+            <td>{{ assignment.submittedBy }}</td>
+            <td>
+              <p-button 
+                label="Audit" 
+                size="small" 
+                (onClick)="onAudit(assignment)">
+              </p-button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </p-card>
+
+  <!-- My Proxy Assignments Section -->
+  <p-card header="My Proxy Assignments" styleClass="mb-4">
+    <div class="text-center text-500 p-4">
+      <i class="pi pi-info-circle mr-2"></i>
+      <span>No proxy assignments available</span>
+    </div>
+  </p-card>
+</div>

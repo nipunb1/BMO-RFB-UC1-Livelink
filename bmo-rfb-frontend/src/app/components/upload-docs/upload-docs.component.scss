@@ -1,0 +1,51 @@
+.alert-message {
+  border-left: 4px solid var(--blue-500);
+  background: var(--blue-50);
+}
+
+.document-tree {
+  .p-tree {
+    border: 1px solid var(--surface-300);
+    border-radius: 6px;
+    
+    .p-tree-container {
+      padding: 1rem;
+    }
+    
+    .p-treenode-content {
+      padding: 0.5rem;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+      
+      &:hover {
+        background: var(--primary-50);
+      }
+    }
+    
+    .p-treenode-icon {
+      color: var(--primary-color);
+    }
+  }
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+:host ::ng-deep {
+  .p-fileupload {
+    .p-fileupload-content {
+      border: 2px dashed var(--surface-300);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        border-color: var(--primary-color);
+        background: var(--primary-50);
+      }
+    }
+  }
+}

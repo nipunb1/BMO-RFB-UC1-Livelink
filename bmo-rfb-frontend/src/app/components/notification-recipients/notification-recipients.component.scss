@@ -1,0 +1,99 @@
+.recipients-section {
+  .field {
+    margin-bottom: 1.5rem;
+  }
+  
+  .recipient-display {
+    display: block;
+    margin-top: 0.5rem;
+    color: var(--text-color-secondary);
+    font-style: italic;
+  }
+  
+  .field-help {
+    display: block;
+    margin-top: 0.5rem;
+    color: var(--text-color-secondary);
+    font-size: 0.875rem;
+    line-height: 1.4;
+  }
+}
+
+.recipient-item {
+  padding: 0.5rem 0;
+  
+  .recipient-name {
+    font-weight: 600;
+    color: var(--text-color);
+  }
+  
+  .recipient-details {
+    font-size: 0.875rem;
+    color: var(--text-color-secondary);
+    margin-top: 0.25rem;
+  }
+}
+
+.recipients-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  
+  .summary-item {
+    padding: 1rem;
+    border: 1px solid var(--surface-300);
+    border-radius: 6px;
+    background: var(--surface-50);
+    
+    .summary-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      color: var(--primary-color);
+    }
+    
+    .summary-content {
+      div:first-child {
+        font-weight: 600;
+        color: var(--text-color);
+        margin-bottom: 0.25rem;
+      }
+    }
+  }
+}
+
+.notification-settings {
+  border-left: 4px solid var(--primary-color);
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+:host ::ng-deep {
+  .p-autocomplete {
+    .p-autocomplete-input {
+      width: 100%;
+    }
+    
+    .p-autocomplete-panel {
+      .p-autocomplete-items {
+        .p-autocomplete-item {
+          padding: 0.75rem;
+          border-bottom: 1px solid var(--surface-200);
+          
+          &:hover {
+            background: var(--primary-50);
+          }
+          
+          &:last-child {
+            border-bottom: none;
+          }
+        }
+      }
+    }
+  }
+}
