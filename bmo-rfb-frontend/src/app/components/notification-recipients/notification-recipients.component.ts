@@ -34,7 +34,7 @@ interface Recipient {
   styleUrl: './notification-recipients.component.scss'
 })
 export class NotificationRecipientsComponent implements OnInit {
-  borrowerName: string = 'BMO Transamerica Funding Ventures';
+  borrowerName: string = 'XYZ Transamerica Funding Ventures';
   borrowerUen: string = '10002/84';
   borrowerFiscalYearEnd: string = 'FY31';
   monthlyDueDays: number = 30;
@@ -65,49 +65,49 @@ export class NotificationRecipientsComponent implements OnInit {
       {
         id: '1',
         name: 'John Smith',
-        email: 'john.smith@bmo.com',
+        email: 'john.smith@xyz.com',
         department: 'Risk Management'
       },
       {
         id: '2',
         name: 'Sarah Johnson',
-        email: 'sarah.johnson@bmo.com',
+        email: 'sarah.johnson@xyz.com',
         department: 'Credit Analysis'
       },
       {
         id: '3',
         name: 'Michael Brown',
-        email: 'michael.brown@bmo.com',
+        email: 'michael.brown@xyz.com',
         department: 'Compliance'
       },
       {
         id: '4',
         name: 'Emily Davis',
-        email: 'emily.davis@bmo.com',
+        email: 'emily.davis@xyz.com',
         department: 'Portfolio Management'
       },
       {
         id: '5',
         name: 'David Wilson',
-        email: 'david.wilson@bmo.com',
+        email: 'david.wilson@xyz.com',
         department: 'Risk Management'
       },
       {
         id: '6',
         name: 'Lisa Anderson',
-        email: 'lisa.anderson@bmo.com',
+        email: 'lisa.anderson@xyz.com',
         department: 'Credit Analysis'
       },
       {
         id: '7',
         name: 'Robert Taylor',
-        email: 'robert.taylor@bmo.com',
+        email: 'robert.taylor@xyz.com',
         department: 'Audit'
       },
       {
         id: '8',
         name: 'Jennifer Martinez',
-        email: 'jennifer.martinez@bmo.com',
+        email: 'jennifer.martinez@xyz.com',
         department: 'Compliance'
       }
     ];

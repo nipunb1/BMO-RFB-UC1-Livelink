@@ -39,7 +39,7 @@ describe('NotificationRecipientsComponent', () => {
   });
 
   it('should initialize with default values', () => {
-    expect(component.borrowerName).toBe('BMO Transamerica Funding Ventures');
+    expect(component.borrowerName).toBe('XYZ Transamerica Funding Ventures');
     expect(component.borrowerUen).toBe('10002/84');
     expect(component.borrowerFiscalYearEnd).toBe('FY31');
     expect(component.monthlyDueDays).toBe(30);
@@ -130,12 +130,12 @@ describe('NotificationRecipientsComponent', () => {
     const recipient = {
       id: '1',
       name: 'John Smith',
-      email: 'john.smith@bmo.com',
+      email: 'john.smith@xyz.com',
       department: 'Risk Management'
     };
     
     const display = component.getRecipientDisplay(recipient);
-    expect(display).toBe('John Smith (john.smith@bmo.com)');
+    expect(display).toBe('John Smith (john.smith@xyz.com)');
   });
 
   it('should handle null recipient display', () => {
@@ -227,7 +227,7 @@ describe('NotificationRecipientsComponent', () => {
 
   it('should handle send test email action', () => {
     spyOn(console, 'log');
-    const mockRecipient = { name: 'Test User', email: 'test@bmo.com' };
+    const mockRecipient = { name: 'Test User', email: 'test@xyz.com' };
     
     component.sendTestEmail(mockRecipient);
     

@@ -40,7 +40,7 @@ interface TestingResult {
   styleUrl: './testing-results.component.scss'
 })
 export class TestingResultsComponent implements OnInit {
-  borrowerName: string = 'BMO Transamerica Funding Ventures';
+  borrowerName: string = 'XYZ Transamerica Funding Ventures';
   borrowerUen: string = '10002/84';
   borrowerFiscalYearEnd: string = 'FY31';
   monthlyDueDays: number = 30;
@@ -82,7 +82,7 @@ export class TestingResultsComponent implements OnInit {
     this.testingResults = [
       {
         statementDesc: 'Q4 2024 Financial Statement Analysis - Comprehensive review of financial position including balance sheet, income statement, and cash flow analysis for covenant compliance verification.',
-        trackingItem: 'BMO SK Funded Ratio EBITDA - test',
+        trackingItem: 'XYZ SK Funded Ratio EBITDA - test',
         dueDays: 30,
         threshold: 1.25,
         result: 1.45,
@@ -92,7 +92,7 @@ export class TestingResultsComponent implements OnInit {
       },
       {
         statementDesc: 'Q4 2024 Equity Analysis - Detailed assessment of equity position relative to total assets for maintaining required capital adequacy ratios.',
-        trackingItem: 'BMO Minimum Equity to Assets - test',
+        trackingItem: 'XYZ Minimum Equity to Assets - test',
         dueDays: 30,
         threshold: 0.35,
         result: 0.42,
@@ -102,7 +102,7 @@ export class TestingResultsComponent implements OnInit {
       },
       {
         statementDesc: 'Q4 2024 Asset Quality Review - Comprehensive evaluation of asset portfolio quality and debt service coverage capabilities.',
-        trackingItem: 'BMO PMI Assets/Debt - Testing Limit 1',
+        trackingItem: 'XYZ PMI Assets/Debt - Testing Limit 1',
         dueDays: 45,
         threshold: 2.0,
         result: 2.35,
@@ -112,7 +112,7 @@ export class TestingResultsComponent implements OnInit {
       },
       {
         statementDesc: 'Q4 2024 Liquidity Assessment - Analysis of current liquidity position and short-term debt obligations coverage.',
-        trackingItem: 'BMO Current Ratio - Liquidity Test',
+        trackingItem: 'XYZ Current Ratio - Liquidity Test',
         dueDays: 30,
         threshold: 1.5,
         result: 1.8,

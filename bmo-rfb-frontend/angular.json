@@ -64,7 +64,7 @@
         "serve": {
           "builder": "@angular/build:dev-server",
           "options": {
-            "allowedHosts": ["assignment-management-app-tunnel-qzlsdp9q.devinapps.com"]
+            "allowedHosts": ["assignment-management-app-tunnel-qzlsdp9q.devinapps.com", "bmo-ui-app-tunnel-nbsmo44v.devinapps.com"]
           },
           "configurations": {
             "production": {

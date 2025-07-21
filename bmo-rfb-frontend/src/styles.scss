@@ -1,4 +1,4 @@
-/* Enhanced BMO RFB Application Styles with WOW Factor */
+/* Enhanced XYZ RFB Application Styles with WOW Factor */
 @import "primeicons/primeicons.css";
 @import "primeflex/primeflex.css";
 
@@ -256,8 +256,8 @@ h1, h2, h3, h4, h5, h6 {
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-/* Enhanced BMO Header */
-.bmo-header {
+/* Enhanced XYZ Header */
+.xyz-header {
   background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 50%, #0d47a1 100%);
   color: white;
   padding: 1.5rem 2rem;
@@ -269,7 +269,7 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: var(--shadow-lg);
 }
 
-.bmo-header::before {
+.xyz-header::before {
   content: '';
   position: absolute;
   top: 0;
@@ -281,7 +281,7 @@ h1, h2, h3, h4, h5, h6 {
   pointer-events: none;
 }
 
-.bmo-logo {
+.xyz-logo {
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -291,7 +291,7 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 1;
 }
 
-.bmo-logo i {
+.xyz-logo i {
   font-size: 2rem;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
@@ -441,7 +441,7 @@ h1, h2, h3, h4, h5, h6 {
     gap: 1rem;
   }
   
-  .bmo-header {
+  .xyz-header {
     flex-direction: column;
     gap: 1rem;
     text-align: center;

@@ -30,7 +30,7 @@ import { TreeNode } from 'primeng/api';
   styleUrl: './upload-docs.component.scss'
 })
 export class UploadDocsComponent implements OnInit {
-  borrowerName: string = 'BMO Transamerica Funding Ventures';
+  borrowerName: string = 'XYZ Transamerica Funding Ventures';
   borrowerUen: string = '10002/84';
   borrowerFiscalYearEnd: string = 'FY31';
   monthlyDueDays: number = 30;

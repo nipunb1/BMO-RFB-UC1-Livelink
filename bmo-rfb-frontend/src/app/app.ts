@@ -20,7 +20,7 @@ import { NotificationRecipientsComponent } from './components/notification-recip
   styleUrl: './app.scss'
 })
 export class App {
-  title = 'BMO RFB Application';
+  title = 'XYZ RFB Application';
   activeTabIndex = 0;
   currentPageTitle = 'My Assignments';
 

@@ -41,7 +41,7 @@ describe('TestingResultsComponent', () => {
   });
 
   it('should initialize with default values', () => {
-    expect(component.borrowerName).toBe('BMO Transamerica Funding Ventures');
+    expect(component.borrowerName).toBe('XYZ Transamerica Funding Ventures');
     expect(component.borrowerUen).toBe('10002/84');
     expect(component.borrowerFiscalYearEnd).toBe('FY31');
     expect(component.monthlyDueDays).toBe(30);
@@ -85,7 +85,7 @@ describe('TestingResultsComponent', () => {
     
     expect(component.testingResults.length).toBe(4);
     expect(component.filteredTestingResults.length).toBe(4);
-    expect(component.testingResults[0].trackingItem).toBe('BMO SK Funded Ratio EBITDA - test');
+    expect(component.testingResults[0].trackingItem).toBe('XYZ SK Funded Ratio EBITDA - test');
     expect(component.testingResults[0].passFail).toBe('Pass');
   });
 

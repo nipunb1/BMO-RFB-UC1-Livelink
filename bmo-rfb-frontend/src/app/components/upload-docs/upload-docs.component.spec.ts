@@ -42,7 +42,7 @@ describe('UploadDocsComponent', () => {
   });
 
   it('should initialize with default values', () => {
-    expect(component.borrowerName).toBe('BMO Transamerica Funding Ventures');
+    expect(component.borrowerName).toBe('XYZ Transamerica Funding Ventures');
     expect(component.borrowerUen).toBe('10002/84');
     expect(component.borrowerFiscalYearEnd).toBe('FY31');
     expect(component.monthlyDueDays).toBe(30);
