@@ -1,0 +1,13 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+BMO RFB Backend,com.bmo.rfb.controller,NotificationRecipientController,0,89,0,4,0,24,0,12,0,10
+BMO RFB Backend,com.bmo.rfb.controller,AssignmentController,0,94,0,4,0,25,0,12,0,10
+BMO RFB Backend,com.bmo.rfb.controller,TestingResultController,55,44,2,2,14,12,7,6,6,5
+BMO RFB Backend,com.bmo.rfb.config,DataInitializer,0,282,3,3,0,47,3,5,0,5
+BMO RFB Backend,com.bmo.rfb.service,TestingResultService,0,121,0,4,0,29,0,13,0,11
+BMO RFB Backend,com.bmo.rfb.service,AssignmentService,0,115,0,4,0,28,0,12,0,10
+BMO RFB Backend,com.bmo.rfb.service,NotificationRecipientService,0,94,0,4,0,23,0,12,0,10
+BMO RFB Backend,com.bmo.rfb,RfbApplication,5,3,0,0,2,1,1,1,1,1
+BMO RFB Backend,com.bmo.rfb.model,NotificationRecipient,0,97,0,0,0,31,0,21,0,21
+BMO RFB Backend,com.bmo.rfb.model,Assignment,0,147,0,0,0,46,0,31,0,31
+BMO RFB Backend,com.bmo.rfb.model,Document,0,127,0,0,0,40,0,27,0,27
+BMO RFB Backend,com.bmo.rfb.model,TestingResult,0,147,0,0,0,46,0,31,0,31

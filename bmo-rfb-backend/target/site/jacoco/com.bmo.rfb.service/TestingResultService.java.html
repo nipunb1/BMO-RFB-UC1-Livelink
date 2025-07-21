@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TestingResultService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">BMO RFB Backend</a> &gt; <a href="index.source.html" class="el_package">com.bmo.rfb.service</a> &gt; <span class="el_source">TestingResultService.java</span></div><h1>TestingResultService.java</h1><pre class="source lang-java linenums">package com.bmo.rfb.service;
+
+import com.bmo.rfb.model.TestingResult;
+import com.bmo.rfb.repository.TestingResultRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.Optional;
+
+@Service
+<span class="fc" id="L11">public class TestingResultService {</span>
+    
+    @Autowired
+    private TestingResultRepository testingResultRepository;
+    
+    public List&lt;TestingResult&gt; getAllTestingResults() {
+<span class="fc" id="L17">        return testingResultRepository.findAll();</span>
+    }
+    
+    public Optional&lt;TestingResult&gt; getTestingResultById(Long id) {
+<span class="fc" id="L21">        return testingResultRepository.findById(id);</span>
+    }
+    
+    public List&lt;TestingResult&gt; getTestingResultsByUen(String uen) {
+<span class="fc" id="L25">        return testingResultRepository.findByUen(uen);</span>
+    }
+    
+    public List&lt;TestingResult&gt; getTestingResultsByBorrowerName(String borrowerName) {
+<span class="fc" id="L29">        return testingResultRepository.findByBorrowerNameContainingIgnoreCase(borrowerName);</span>
+    }
+    
+    public List&lt;TestingResult&gt; getTestingResultsByApprovalStatus(String approvalStatus) {
+<span class="fc" id="L33">        return testingResultRepository.findByApprovalStatus(approvalStatus);</span>
+    }
+    
+    public List&lt;TestingResult&gt; getTestingResultsByStatus(String status) {
+<span class="fc" id="L37">        return testingResultRepository.findByStatus(status);</span>
+    }
+    
+    public List&lt;TestingResult&gt; getTestingResultsByUenAndApprovalStatus(String uen, String approvalStatus) {
+<span class="fc" id="L41">        return testingResultRepository.findByUenAndApprovalStatus(uen, approvalStatus);</span>
+    }
+    
+    public TestingResult saveTestingResult(TestingResult testingResult) {
+<span class="fc" id="L45">        return testingResultRepository.save(testingResult);</span>
+    }
+    
+    public TestingResult updateTestingResult(Long id, TestingResult testingResultDetails) {
+<span class="fc" id="L49">        Optional&lt;TestingResult&gt; optionalTestingResult = testingResultRepository.findById(id);</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">        if (optionalTestingResult.isPresent()) {</span>
+<span class="fc" id="L51">            TestingResult testingResult = optionalTestingResult.get();</span>
+<span class="fc" id="L52">            testingResult.setUen(testingResultDetails.getUen());</span>
+<span class="fc" id="L53">            testingResult.setBorrowerName(testingResultDetails.getBorrowerName());</span>
+<span class="fc" id="L54">            testingResult.setStatementDesc(testingResultDetails.getStatementDesc());</span>
+<span class="fc" id="L55">            testingResult.setTrackingItem(testingResultDetails.getTrackingItem());</span>
+<span class="fc" id="L56">            testingResult.setDueDays(testingResultDetails.getDueDays());</span>
+<span class="fc" id="L57">            testingResult.setThreshold(testingResultDetails.getThreshold());</span>
+<span class="fc" id="L58">            testingResult.setResult(testingResultDetails.getResult());</span>
+<span class="fc" id="L59">            testingResult.setPassFail(testingResultDetails.getPassFail());</span>
+<span class="fc" id="L60">            testingResult.setComments(testingResultDetails.getComments());</span>
+<span class="fc" id="L61">            testingResult.setStatus(testingResultDetails.getStatus());</span>
+<span class="fc" id="L62">            testingResult.setApprovalStatus(testingResultDetails.getApprovalStatus());</span>
+<span class="fc" id="L63">            return testingResultRepository.save(testingResult);</span>
+        }
+<span class="fc" id="L65">        return null;</span>
+    }
+    
+    public boolean deleteTestingResult(Long id) {
+<span class="fc bfc" id="L69" title="All 2 branches covered.">        if (testingResultRepository.existsById(id)) {</span>
+<span class="fc" id="L70">            testingResultRepository.deleteById(id);</span>
+<span class="fc" id="L71">            return true;</span>
+        }
+<span class="fc" id="L73">        return false;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

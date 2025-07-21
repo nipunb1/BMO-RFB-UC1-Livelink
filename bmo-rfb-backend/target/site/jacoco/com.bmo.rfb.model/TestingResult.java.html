@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TestingResult.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">BMO RFB Backend</a> &gt; <a href="index.source.html" class="el_package">com.bmo.rfb.model</a> &gt; <span class="el_source">TestingResult.java</span></div><h1>TestingResult.java</h1><pre class="source lang-java linenums">package com.bmo.rfb.model;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = &quot;testing_results&quot;)
+public class TestingResult {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @NotBlank
+    @Column(name = &quot;uen&quot;)
+    private String uen;
+    
+    @NotBlank
+    @Column(name = &quot;borrower_name&quot;)
+    private String borrowerName;
+    
+    @Column(name = &quot;statement_desc&quot;, columnDefinition = &quot;TEXT&quot;)
+    private String statementDesc;
+    
+    @Column(name = &quot;tracking_item&quot;)
+    private String trackingItem;
+    
+    @Column(name = &quot;due_days&quot;)
+    private Integer dueDays;
+    
+    @Column(name = &quot;threshold&quot;)
+    private Double threshold;
+    
+    @Column(name = &quot;result&quot;)
+    private Double result;
+    
+    @Column(name = &quot;pass_fail&quot;)
+    private String passFail;
+    
+    @Column(name = &quot;comments&quot;, columnDefinition = &quot;TEXT&quot;)
+    private String comments;
+    
+    @Column(name = &quot;status&quot;)
+    private String status;
+    
+    @Column(name = &quot;approval_status&quot;)
+    private String approvalStatus;
+    
+    @Column(name = &quot;created_date&quot;)
+    private LocalDateTime createdDate;
+    
+    @Column(name = &quot;last_updated&quot;)
+    private LocalDateTime lastUpdated;
+    
+<span class="fc" id="L56">    public TestingResult() {}</span>
+    
+    public TestingResult(String uen, String borrowerName, String statementDesc, 
+                        String trackingItem, Integer dueDays, Double threshold, 
+                        Double result, String passFail, String comments, 
+<span class="fc" id="L61">                        String status, String approvalStatus) {</span>
+<span class="fc" id="L62">        this.uen = uen;</span>
+<span class="fc" id="L63">        this.borrowerName = borrowerName;</span>
+<span class="fc" id="L64">        this.statementDesc = statementDesc;</span>
+<span class="fc" id="L65">        this.trackingItem = trackingItem;</span>
+<span class="fc" id="L66">        this.dueDays = dueDays;</span>
+<span class="fc" id="L67">        this.threshold = threshold;</span>
+<span class="fc" id="L68">        this.result = result;</span>
+<span class="fc" id="L69">        this.passFail = passFail;</span>
+<span class="fc" id="L70">        this.comments = comments;</span>
+<span class="fc" id="L71">        this.status = status;</span>
+<span class="fc" id="L72">        this.approvalStatus = approvalStatus;</span>
+<span class="fc" id="L73">        this.createdDate = LocalDateTime.now();</span>
+<span class="fc" id="L74">        this.lastUpdated = LocalDateTime.now();</span>
+<span class="fc" id="L75">    }</span>
+    
+    @PreUpdate
+    public void preUpdate() {
+<span class="fc" id="L79">        this.lastUpdated = LocalDateTime.now();</span>
+<span class="fc" id="L80">    }</span>
+
+<span class="fc" id="L82">    public Long getId() { return id; }</span>
+<span class="fc" id="L83">    public void setId(Long id) { this.id = id; }</span>
+
+<span class="fc" id="L85">    public String getUen() { return uen; }</span>
+<span class="fc" id="L86">    public void setUen(String uen) { this.uen = uen; }</span>
+
+<span class="fc" id="L88">    public String getBorrowerName() { return borrowerName; }</span>
+<span class="fc" id="L89">    public void setBorrowerName(String borrowerName) { this.borrowerName = borrowerName; }</span>
+
+<span class="fc" id="L91">    public String getStatementDesc() { return statementDesc; }</span>
+<span class="fc" id="L92">    public void setStatementDesc(String statementDesc) { this.statementDesc = statementDesc; }</span>
+
+<span class="fc" id="L94">    public String getTrackingItem() { return trackingItem; }</span>
+<span class="fc" id="L95">    public void setTrackingItem(String trackingItem) { this.trackingItem = trackingItem; }</span>
+
+<span class="fc" id="L97">    public Integer getDueDays() { return dueDays; }</span>
+<span class="fc" id="L98">    public void setDueDays(Integer dueDays) { this.dueDays = dueDays; }</span>
+
+<span class="fc" id="L100">    public Double getThreshold() { return threshold; }</span>
+<span class="fc" id="L101">    public void setThreshold(Double threshold) { this.threshold = threshold; }</span>
+
+<span class="fc" id="L103">    public Double getResult() { return result; }</span>
+<span class="fc" id="L104">    public void setResult(Double result) { this.result = result; }</span>
+
+<span class="fc" id="L106">    public String getPassFail() { return passFail; }</span>
+<span class="fc" id="L107">    public void setPassFail(String passFail) { this.passFail = passFail; }</span>
+
+<span class="fc" id="L109">    public String getComments() { return comments; }</span>
+<span class="fc" id="L110">    public void setComments(String comments) { this.comments = comments; }</span>
+
+<span class="fc" id="L112">    public String getStatus() { return status; }</span>
+<span class="fc" id="L113">    public void setStatus(String status) { this.status = status; }</span>
+
+<span class="fc" id="L115">    public String getApprovalStatus() { return approvalStatus; }</span>
+<span class="fc" id="L116">    public void setApprovalStatus(String approvalStatus) { this.approvalStatus = approvalStatus; }</span>
+
+<span class="fc" id="L118">    public LocalDateTime getCreatedDate() { return createdDate; }</span>
+<span class="fc" id="L119">    public void setCreatedDate(LocalDateTime createdDate) { this.createdDate = createdDate; }</span>
+
+<span class="fc" id="L121">    public LocalDateTime getLastUpdated() { return lastUpdated; }</span>
+<span class="fc" id="L122">    public void setLastUpdated(LocalDateTime lastUpdated) { this.lastUpdated = lastUpdated; }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

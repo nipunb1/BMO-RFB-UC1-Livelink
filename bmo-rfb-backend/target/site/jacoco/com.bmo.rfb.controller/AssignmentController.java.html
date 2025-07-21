@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AssignmentController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">BMO RFB Backend</a> &gt; <a href="index.source.html" class="el_package">com.bmo.rfb.controller</a> &gt; <span class="el_source">AssignmentController.java</span></div><h1>AssignmentController.java</h1><pre class="source lang-java linenums">package com.bmo.rfb.controller;
+
+import com.bmo.rfb.model.Assignment;
+import com.bmo.rfb.service.AssignmentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping(&quot;/api/assignments&quot;)
+@CrossOrigin(origins = &quot;*&quot;)
+<span class="fc" id="L14">public class AssignmentController {</span>
+    
+    @Autowired
+    private AssignmentService assignmentService;
+    
+    @GetMapping
+    public ResponseEntity&lt;List&lt;Assignment&gt;&gt; getAllAssignments() {
+<span class="fc" id="L21">        List&lt;Assignment&gt; assignments = assignmentService.getAllAssignments();</span>
+<span class="fc" id="L22">        return ResponseEntity.ok(assignments);</span>
+    }
+    
+    @GetMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;Assignment&gt; getAssignmentById(@PathVariable Long id) {
+<span class="fc" id="L27">        Optional&lt;Assignment&gt; assignment = assignmentService.getAssignmentById(id);</span>
+<span class="fc" id="L28">        return assignment.map(ResponseEntity::ok)</span>
+<span class="fc" id="L29">                        .orElse(ResponseEntity.notFound().build());</span>
+    }
+    
+    @GetMapping(&quot;/uen/{uen}&quot;)
+    public ResponseEntity&lt;List&lt;Assignment&gt;&gt; getAssignmentsByUen(@PathVariable String uen) {
+<span class="fc" id="L34">        String decodedUen = java.net.URLDecoder.decode(uen, java.nio.charset.StandardCharsets.UTF_8);</span>
+<span class="fc" id="L35">        List&lt;Assignment&gt; assignments = assignmentService.getAssignmentsByUen(decodedUen);</span>
+<span class="fc" id="L36">        return ResponseEntity.ok(assignments);</span>
+    }
+    
+    @GetMapping(&quot;/borrower/{borrowerName}&quot;)
+    public ResponseEntity&lt;List&lt;Assignment&gt;&gt; getAssignmentsByBorrowerName(@PathVariable String borrowerName) {
+<span class="fc" id="L41">        List&lt;Assignment&gt; assignments = assignmentService.getAssignmentsByBorrowerName(borrowerName);</span>
+<span class="fc" id="L42">        return ResponseEntity.ok(assignments);</span>
+    }
+    
+    @GetMapping(&quot;/status/{status}&quot;)
+    public ResponseEntity&lt;List&lt;Assignment&gt;&gt; getAssignmentsByStatus(@PathVariable String status) {
+<span class="fc" id="L47">        List&lt;Assignment&gt; assignments = assignmentService.getAssignmentsByStatus(status);</span>
+<span class="fc" id="L48">        return ResponseEntity.ok(assignments);</span>
+    }
+    
+    @GetMapping(&quot;/submitted-by/{submittedBy}&quot;)
+    public ResponseEntity&lt;List&lt;Assignment&gt;&gt; getAssignmentsBySubmittedBy(@PathVariable String submittedBy) {
+<span class="fc" id="L53">        List&lt;Assignment&gt; assignments = assignmentService.getAssignmentsBySubmittedBy(submittedBy);</span>
+<span class="fc" id="L54">        return ResponseEntity.ok(assignments);</span>
+    }
+    
+    @PostMapping
+    public ResponseEntity&lt;Assignment&gt; createAssignment(@RequestBody Assignment assignment) {
+<span class="fc" id="L59">        Assignment savedAssignment = assignmentService.saveAssignment(assignment);</span>
+<span class="fc" id="L60">        return ResponseEntity.ok(savedAssignment);</span>
+    }
+    
+    @PutMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;Assignment&gt; updateAssignment(@PathVariable Long id, @RequestBody Assignment assignmentDetails) {
+<span class="fc" id="L65">        Assignment updatedAssignment = assignmentService.updateAssignment(id, assignmentDetails);</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">        if (updatedAssignment != null) {</span>
+<span class="fc" id="L67">            return ResponseEntity.ok(updatedAssignment);</span>
+        }
+<span class="fc" id="L69">        return ResponseEntity.notFound().build();</span>
+    }
+    
+    @DeleteMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;Void&gt; deleteAssignment(@PathVariable Long id) {
+<span class="fc" id="L74">        boolean deleted = assignmentService.deleteAssignment(id);</span>
+<span class="fc bfc" id="L75" title="All 2 branches covered.">        if (deleted) {</span>
+<span class="fc" id="L76">            return ResponseEntity.ok().build();</span>
+        }
+<span class="fc" id="L78">        return ResponseEntity.notFound().build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

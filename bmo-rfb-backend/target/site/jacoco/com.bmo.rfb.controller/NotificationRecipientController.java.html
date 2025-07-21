@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NotificationRecipientController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">BMO RFB Backend</a> &gt; <a href="index.source.html" class="el_package">com.bmo.rfb.controller</a> &gt; <span class="el_source">NotificationRecipientController.java</span></div><h1>NotificationRecipientController.java</h1><pre class="source lang-java linenums">package com.bmo.rfb.controller;
+
+import com.bmo.rfb.model.NotificationRecipient;
+import com.bmo.rfb.service.NotificationRecipientService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping(&quot;/api/notification-recipients&quot;)
+@CrossOrigin(origins = &quot;*&quot;)
+<span class="fc" id="L14">public class NotificationRecipientController {</span>
+    
+    @Autowired
+    private NotificationRecipientService notificationRecipientService;
+    
+    @GetMapping
+    public ResponseEntity&lt;List&lt;NotificationRecipient&gt;&gt; getAllRecipients() {
+<span class="fc" id="L21">        List&lt;NotificationRecipient&gt; recipients = notificationRecipientService.getAllRecipients();</span>
+<span class="fc" id="L22">        return ResponseEntity.ok(recipients);</span>
+    }
+    
+    @GetMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;NotificationRecipient&gt; getRecipientById(@PathVariable Long id) {
+<span class="fc" id="L27">        Optional&lt;NotificationRecipient&gt; recipient = notificationRecipientService.getRecipientById(id);</span>
+<span class="fc" id="L28">        return recipient.map(ResponseEntity::ok)</span>
+<span class="fc" id="L29">                       .orElse(ResponseEntity.notFound().build());</span>
+    }
+    
+    @GetMapping(&quot;/active&quot;)
+    public ResponseEntity&lt;List&lt;NotificationRecipient&gt;&gt; getActiveRecipients() {
+<span class="fc" id="L34">        List&lt;NotificationRecipient&gt; recipients = notificationRecipientService.getActiveRecipients();</span>
+<span class="fc" id="L35">        return ResponseEntity.ok(recipients);</span>
+    }
+    
+    @GetMapping(&quot;/search/{searchTerm}&quot;)
+    public ResponseEntity&lt;List&lt;NotificationRecipient&gt;&gt; searchRecipients(@PathVariable String searchTerm) {
+<span class="fc" id="L40">        List&lt;NotificationRecipient&gt; recipients = notificationRecipientService.searchRecipients(searchTerm);</span>
+<span class="fc" id="L41">        return ResponseEntity.ok(recipients);</span>
+    }
+    
+    @GetMapping(&quot;/department/{department}&quot;)
+    public ResponseEntity&lt;List&lt;NotificationRecipient&gt;&gt; getRecipientsByDepartment(@PathVariable String department) {
+<span class="fc" id="L46">        List&lt;NotificationRecipient&gt; recipients = notificationRecipientService.getRecipientsByDepartment(department);</span>
+<span class="fc" id="L47">        return ResponseEntity.ok(recipients);</span>
+    }
+    
+    @GetMapping(&quot;/status/{status}&quot;)
+    public ResponseEntity&lt;List&lt;NotificationRecipient&gt;&gt; getRecipientsByStatus(@PathVariable String status) {
+<span class="fc" id="L52">        List&lt;NotificationRecipient&gt; recipients = notificationRecipientService.getRecipientsByStatus(status);</span>
+<span class="fc" id="L53">        return ResponseEntity.ok(recipients);</span>
+    }
+    
+    @PostMapping
+    public ResponseEntity&lt;NotificationRecipient&gt; createRecipient(@RequestBody NotificationRecipient recipient) {
+<span class="fc" id="L58">        NotificationRecipient savedRecipient = notificationRecipientService.saveRecipient(recipient);</span>
+<span class="fc" id="L59">        return ResponseEntity.ok(savedRecipient);</span>
+    }
+    
+    @PutMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;NotificationRecipient&gt; updateRecipient(@PathVariable Long id, @RequestBody NotificationRecipient recipientDetails) {
+<span class="fc" id="L64">        NotificationRecipient updatedRecipient = notificationRecipientService.updateRecipient(id, recipientDetails);</span>
+<span class="fc bfc" id="L65" title="All 2 branches covered.">        if (updatedRecipient != null) {</span>
+<span class="fc" id="L66">            return ResponseEntity.ok(updatedRecipient);</span>
+        }
+<span class="fc" id="L68">        return ResponseEntity.notFound().build();</span>
+    }
+    
+    @DeleteMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;Void&gt; deleteRecipient(@PathVariable Long id) {
+<span class="fc" id="L73">        boolean deleted = notificationRecipientService.deleteRecipient(id);</span>
+<span class="fc bfc" id="L74" title="All 2 branches covered.">        if (deleted) {</span>
+<span class="fc" id="L75">            return ResponseEntity.ok().build();</span>
+        }
+<span class="fc" id="L77">        return ResponseEntity.notFound().build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

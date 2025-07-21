@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Document.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">BMO RFB Backend</a> &gt; <a href="index.source.html" class="el_package">com.bmo.rfb.model</a> &gt; <span class="el_source">Document.java</span></div><h1>Document.java</h1><pre class="source lang-java linenums">package com.bmo.rfb.model;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = &quot;documents&quot;)
+public class Document {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @NotBlank
+    @Column(name = &quot;uen&quot;)
+    private String uen;
+    
+    @NotBlank
+    @Column(name = &quot;borrower_name&quot;)
+    private String borrowerName;
+    
+    @NotBlank
+    @Column(name = &quot;file_name&quot;)
+    private String fileName;
+    
+    @Column(name = &quot;file_path&quot;)
+    private String filePath;
+    
+    @Column(name = &quot;file_size&quot;)
+    private Long fileSize;
+    
+    @Column(name = &quot;file_type&quot;)
+    private String fileType;
+    
+    @Column(name = &quot;year_folder&quot;)
+    private String yearFolder;
+    
+    @Column(name = &quot;upload_status&quot;)
+    private String uploadStatus;
+    
+    @Column(name = &quot;uploaded_by&quot;)
+    private String uploadedBy;
+    
+    @Column(name = &quot;created_date&quot;)
+    private LocalDateTime createdDate;
+    
+    @Column(name = &quot;last_updated&quot;)
+    private LocalDateTime lastUpdated;
+    
+<span class="fc" id="L51">    public Document() {}</span>
+    
+    public Document(String uen, String borrowerName, String fileName, 
+                   String filePath, Long fileSize, String fileType, 
+<span class="fc" id="L55">                   String yearFolder, String uploadStatus, String uploadedBy) {</span>
+<span class="fc" id="L56">        this.uen = uen;</span>
+<span class="fc" id="L57">        this.borrowerName = borrowerName;</span>
+<span class="fc" id="L58">        this.fileName = fileName;</span>
+<span class="fc" id="L59">        this.filePath = filePath;</span>
+<span class="fc" id="L60">        this.fileSize = fileSize;</span>
+<span class="fc" id="L61">        this.fileType = fileType;</span>
+<span class="fc" id="L62">        this.yearFolder = yearFolder;</span>
+<span class="fc" id="L63">        this.uploadStatus = uploadStatus;</span>
+<span class="fc" id="L64">        this.uploadedBy = uploadedBy;</span>
+<span class="fc" id="L65">        this.createdDate = LocalDateTime.now();</span>
+<span class="fc" id="L66">        this.lastUpdated = LocalDateTime.now();</span>
+<span class="fc" id="L67">    }</span>
+    
+    @PreUpdate
+    public void preUpdate() {
+<span class="fc" id="L71">        this.lastUpdated = LocalDateTime.now();</span>
+<span class="fc" id="L72">    }</span>
+
+<span class="fc" id="L74">    public Long getId() { return id; }</span>
+<span class="fc" id="L75">    public void setId(Long id) { this.id = id; }</span>
+
+<span class="fc" id="L77">    public String getUen() { return uen; }</span>
+<span class="fc" id="L78">    public void setUen(String uen) { this.uen = uen; }</span>
+
+<span class="fc" id="L80">    public String getBorrowerName() { return borrowerName; }</span>
+<span class="fc" id="L81">    public void setBorrowerName(String borrowerName) { this.borrowerName = borrowerName; }</span>
+
+<span class="fc" id="L83">    public String getFileName() { return fileName; }</span>
+<span class="fc" id="L84">    public void setFileName(String fileName) { this.fileName = fileName; }</span>
+
+<span class="fc" id="L86">    public String getFilePath() { return filePath; }</span>
+<span class="fc" id="L87">    public void setFilePath(String filePath) { this.filePath = filePath; }</span>
+
+<span class="fc" id="L89">    public Long getFileSize() { return fileSize; }</span>
+<span class="fc" id="L90">    public void setFileSize(Long fileSize) { this.fileSize = fileSize; }</span>
+
+<span class="fc" id="L92">    public String getFileType() { return fileType; }</span>
+<span class="fc" id="L93">    public void setFileType(String fileType) { this.fileType = fileType; }</span>
+
+<span class="fc" id="L95">    public String getYearFolder() { return yearFolder; }</span>
+<span class="fc" id="L96">    public void setYearFolder(String yearFolder) { this.yearFolder = yearFolder; }</span>
+
+<span class="fc" id="L98">    public String getUploadStatus() { return uploadStatus; }</span>
+<span class="fc" id="L99">    public void setUploadStatus(String uploadStatus) { this.uploadStatus = uploadStatus; }</span>
+
+<span class="fc" id="L101">    public String getUploadedBy() { return uploadedBy; }</span>
+<span class="fc" id="L102">    public void setUploadedBy(String uploadedBy) { this.uploadedBy = uploadedBy; }</span>
+
+<span class="fc" id="L104">    public LocalDateTime getCreatedDate() { return createdDate; }</span>
+<span class="fc" id="L105">    public void setCreatedDate(LocalDateTime createdDate) { this.createdDate = createdDate; }</span>
+
+<span class="fc" id="L107">    public LocalDateTime getLastUpdated() { return lastUpdated; }</span>
+<span class="fc" id="L108">    public void setLastUpdated(LocalDateTime lastUpdated) { this.lastUpdated = lastUpdated; }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AssignmentService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">BMO RFB Backend</a> &gt; <a href="index.source.html" class="el_package">com.bmo.rfb.service</a> &gt; <span class="el_source">AssignmentService.java</span></div><h1>AssignmentService.java</h1><pre class="source lang-java linenums">package com.bmo.rfb.service;
+
+import com.bmo.rfb.model.Assignment;
+import com.bmo.rfb.repository.AssignmentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.Optional;
+
+@Service
+<span class="fc" id="L11">public class AssignmentService {</span>
+    
+    @Autowired
+    private AssignmentRepository assignmentRepository;
+    
+    public List&lt;Assignment&gt; getAllAssignments() {
+<span class="fc" id="L17">        return assignmentRepository.findAll();</span>
+    }
+    
+    public Optional&lt;Assignment&gt; getAssignmentById(Long id) {
+<span class="fc" id="L21">        return assignmentRepository.findById(id);</span>
+    }
+    
+    public List&lt;Assignment&gt; getAssignmentsByUen(String uen) {
+<span class="fc" id="L25">        return assignmentRepository.findByUen(uen);</span>
+    }
+    
+    public List&lt;Assignment&gt; getAssignmentsByBorrowerName(String borrowerName) {
+<span class="fc" id="L29">        return assignmentRepository.findByBorrowerNameContainingIgnoreCase(borrowerName);</span>
+    }
+    
+    public List&lt;Assignment&gt; getAssignmentsByStatus(String status) {
+<span class="fc" id="L33">        return assignmentRepository.findByStatus(status);</span>
+    }
+    
+    public List&lt;Assignment&gt; getAssignmentsBySubmittedBy(String submittedBy) {
+<span class="fc" id="L37">        return assignmentRepository.findBySubmittedByOrderByLastUpdatedDesc(submittedBy);</span>
+    }
+    
+    public Assignment saveAssignment(Assignment assignment) {
+<span class="fc" id="L41">        return assignmentRepository.save(assignment);</span>
+    }
+    
+    public Assignment updateAssignment(Long id, Assignment assignmentDetails) {
+<span class="fc" id="L45">        Optional&lt;Assignment&gt; optionalAssignment = assignmentRepository.findById(id);</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">        if (optionalAssignment.isPresent()) {</span>
+<span class="fc" id="L47">            Assignment assignment = optionalAssignment.get();</span>
+<span class="fc" id="L48">            assignment.setUen(assignmentDetails.getUen());</span>
+<span class="fc" id="L49">            assignment.setBorrowerName(assignmentDetails.getBorrowerName());</span>
+<span class="fc" id="L50">            assignment.setStatementDesc(assignmentDetails.getStatementDesc());</span>
+<span class="fc" id="L51">            assignment.setTrackingItem(assignmentDetails.getTrackingItem());</span>
+<span class="fc" id="L52">            assignment.setDueDays(assignmentDetails.getDueDays());</span>
+<span class="fc" id="L53">            assignment.setThreshold(assignmentDetails.getThreshold());</span>
+<span class="fc" id="L54">            assignment.setResult(assignmentDetails.getResult());</span>
+<span class="fc" id="L55">            assignment.setPassFail(assignmentDetails.getPassFail());</span>
+<span class="fc" id="L56">            assignment.setComments(assignmentDetails.getComments());</span>
+<span class="fc" id="L57">            assignment.setSubmittedBy(assignmentDetails.getSubmittedBy());</span>
+<span class="fc" id="L58">            assignment.setStatus(assignmentDetails.getStatus());</span>
+<span class="fc" id="L59">            return assignmentRepository.save(assignment);</span>
+        }
+<span class="fc" id="L61">        return null;</span>
+    }
+    
+    public boolean deleteAssignment(Long id) {
+<span class="fc bfc" id="L65" title="All 2 branches covered.">        if (assignmentRepository.existsById(id)) {</span>
+<span class="fc" id="L66">            assignmentRepository.deleteById(id);</span>
+<span class="fc" id="L67">            return true;</span>
+        }
+<span class="fc" id="L69">        return false;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

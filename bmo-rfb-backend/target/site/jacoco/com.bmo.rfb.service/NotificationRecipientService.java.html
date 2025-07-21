@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NotificationRecipientService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">BMO RFB Backend</a> &gt; <a href="index.source.html" class="el_package">com.bmo.rfb.service</a> &gt; <span class="el_source">NotificationRecipientService.java</span></div><h1>NotificationRecipientService.java</h1><pre class="source lang-java linenums">package com.bmo.rfb.service;
+
+import com.bmo.rfb.model.NotificationRecipient;
+import com.bmo.rfb.repository.NotificationRecipientRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.Optional;
+
+@Service
+<span class="fc" id="L11">public class NotificationRecipientService {</span>
+    
+    @Autowired
+    private NotificationRecipientRepository notificationRecipientRepository;
+    
+    public List&lt;NotificationRecipient&gt; getAllRecipients() {
+<span class="fc" id="L17">        return notificationRecipientRepository.findAll();</span>
+    }
+    
+    public Optional&lt;NotificationRecipient&gt; getRecipientById(Long id) {
+<span class="fc" id="L21">        return notificationRecipientRepository.findById(id);</span>
+    }
+    
+    public List&lt;NotificationRecipient&gt; getActiveRecipients() {
+<span class="fc" id="L25">        return notificationRecipientRepository.findActiveRecipientsOrderByName();</span>
+    }
+    
+    public List&lt;NotificationRecipient&gt; searchRecipients(String searchTerm) {
+<span class="fc" id="L29">        return notificationRecipientRepository.searchRecipients(searchTerm);</span>
+    }
+    
+    public List&lt;NotificationRecipient&gt; getRecipientsByDepartment(String department) {
+<span class="fc" id="L33">        return notificationRecipientRepository.findByDepartment(department);</span>
+    }
+    
+    public List&lt;NotificationRecipient&gt; getRecipientsByStatus(String status) {
+<span class="fc" id="L37">        return notificationRecipientRepository.findByStatus(status);</span>
+    }
+    
+    public NotificationRecipient saveRecipient(NotificationRecipient recipient) {
+<span class="fc" id="L41">        return notificationRecipientRepository.save(recipient);</span>
+    }
+    
+    public NotificationRecipient updateRecipient(Long id, NotificationRecipient recipientDetails) {
+<span class="fc" id="L45">        Optional&lt;NotificationRecipient&gt; optionalRecipient = notificationRecipientRepository.findById(id);</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">        if (optionalRecipient.isPresent()) {</span>
+<span class="fc" id="L47">            NotificationRecipient recipient = optionalRecipient.get();</span>
+<span class="fc" id="L48">            recipient.setName(recipientDetails.getName());</span>
+<span class="fc" id="L49">            recipient.setEmail(recipientDetails.getEmail());</span>
+<span class="fc" id="L50">            recipient.setDepartment(recipientDetails.getDepartment());</span>
+<span class="fc" id="L51">            recipient.setRole(recipientDetails.getRole());</span>
+<span class="fc" id="L52">            recipient.setPhone(recipientDetails.getPhone());</span>
+<span class="fc" id="L53">            recipient.setStatus(recipientDetails.getStatus());</span>
+<span class="fc" id="L54">            return notificationRecipientRepository.save(recipient);</span>
+        }
+<span class="fc" id="L56">        return null;</span>
+    }
+    
+    public boolean deleteRecipient(Long id) {
+<span class="fc bfc" id="L60" title="All 2 branches covered.">        if (notificationRecipientRepository.existsById(id)) {</span>
+<span class="fc" id="L61">            notificationRecipientRepository.deleteById(id);</span>
+<span class="fc" id="L62">            return true;</span>
+        }
+<span class="fc" id="L64">        return false;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
